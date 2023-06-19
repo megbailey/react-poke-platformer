@@ -14,8 +14,8 @@ const Image = styled.img`
 `;
 
 const Tile = (props) => {
-    const { src, width, height, scale, state } = props
-    const left = width * state
+    const { src, width, height, scale, state, start} = props
+    const left = width * state + start
     
     return (
        <Container width={width} height={height} scale={scale}>
