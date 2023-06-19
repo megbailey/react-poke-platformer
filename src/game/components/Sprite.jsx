@@ -24,7 +24,5 @@ export const Sprite = (props) => {
         animate()
     }, [state])
 
-    console.log(state )
     return <Tile src={src} state={state} width={width} height={height} scale={scale} />
-
 }
