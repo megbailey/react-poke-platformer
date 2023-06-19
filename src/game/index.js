@@ -1,24 +1,23 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { GameEngine } from "react-game-engine";
-import Renderer from "./graphics/renderer";
-import Systems from "./systems";
-import Entities from "./entities";
-import ShaderPass from "./graphics/passes/shader-pass";
-import PixelShader from "./graphics/shaders/pixel-shader";
+import Sprite from "./components/Sprite";
+import { MoveBox } from "./systems/move-box"
 
-import "../index.css";
 
-const Game = () => {
+export default class SimpleGame extends PureComponent {
+  render() {
     return (
-        <GameEngine
-            className="game"
-            systems={Systems}
-            entities={Entities()}
-            renderer={Renderer(
-                new ShaderPass(PixelShader())
-        )}
-        />
-    );
-}
+      <GameEngine
+        style={{ width: 800, height: 600, backgroundColor: "white" }}
+        //systems={[MoveBox]}
+        entities={{
+          //-- Notice that each entity has a unique id (required)
+          //-- and a renderer property (optional). If no renderer
+          //-- is supplied with the entity - it won't get displayed.
+          sprite: { x: 200,  y: 200, renderer: <Sprite />}
+        }}>
 
-export default Game;
+      </GameEngine>
+    );
+  }
+}

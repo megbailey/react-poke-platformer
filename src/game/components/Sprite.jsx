@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Tile from './Tile';
+import sprite1 from '../../assets/img/trainer-sprite-1.png'
 
 
-export const Sprite = (props) => {
+const Sprite = (props) => {
     const { src, states, scale, tile, framesPerStep } = props
     const { width, height } = tile
     const [ state, setState ] = useState(0);
@@ -26,3 +27,16 @@ export const Sprite = (props) => {
 
     return <Tile src={src} state={state} width={width} height={height} scale={scale} />
 }
+
+Sprite.defaultProps = {
+    src: sprite1,
+    tile: {
+        width: 16,
+        height: 16
+    },
+    states: 3, 
+    scale: 1.5,
+    framesPerStep: 16
+}
+
+export default Sprite;
