@@ -15,11 +15,15 @@ const Sprite = (props) => {
         }
         tick += 1;
 
-        requestAnimationFrame(animate);
+        return requestAnimationFrame(animate);
     };
 
     useEffect(( ) => {
-        animate()
+        const id = animate()
+
+        return function cancelFrame() {
+            cancelAnimationFrame(id)
+        }
     }, [state])
 
     return <Tile src={src} state={state} width={width} height={height} scale={scale} start={startWidth} />

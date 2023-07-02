@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Sprite from './Sprite';
 import sprite1 from '../../assets/img/trainer-sprite-1.png'
-
 
 const frontFrames = {
     startWidth: 1,
@@ -21,16 +21,16 @@ const rightFrames = {
 }
 
 const playerState = {
-    Up: 0,
-    Down: 1,
-    Left: 2,
-    Right: 3
+    FORWARD: frontFrames,
+    BACK: backFrames,
+    LEFT: leftFrames,
+    RIGHT: rightFrames
 }
-const Player = ( ) => {
- 
+
+const Player = ( props ) => {
     return (
-        <Sprite  
-            {...backFrames}
+        <Sprite
+            {...playerState[props.state]}
             src={sprite1}
             tile={{
                 width: 16,
@@ -40,6 +40,14 @@ const Player = ( ) => {
             framesPerStep={16}
         />
     )
+}
+
+Player.propTypes = {
+    state: PropTypes.oneOf(['FORWARD', 'BACK', 'LEFT', 'RIGHT'])
+}
+
+Player.defaultProps = {
+    state: 'FORWARD'
 }
 
 export default Player
