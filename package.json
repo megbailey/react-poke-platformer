@@ -4,18 +4,14 @@
   "private": true,
   "dependencies": {
     "@popmotion/popcorn": "^0.4.4",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "lodash": "^4.17.21",
-    "oimo": "^1.0.9",
+    "matter-js": "^0.19.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-game-engine": "^1.2.0",
     "react-scripts": "5.0.1",
     "styled-components": "^6.0.0-rc.3",
-    "three": "^0.105.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -46,6 +42,10 @@
     ]
   },
   "devDependencies": {
-    "run-script-os": "^1.0.5"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "run-script-os": "^1.0.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0"
   }
 }

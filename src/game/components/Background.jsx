@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 
 const Background = styled.div`
-    background-color: #8abdf0;
+    background-color: ${props => `${props.colorHex}`};
     background-image: url(${props => props.img}) ;
     width: ${props => `${props.width}px`};
     height: ${props => `${props.height}px`};
