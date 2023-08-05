@@ -1,14 +1,22 @@
 import React, { PureComponent } from "react";
 import { lazy } from 'react';
 import { GameEngine } from "react-game-engine";
-import KeyboardController from "./systems/keyboard-controller";
 import Entities from "./entities";
 import Background from './components/Background'
 import Clouds from '../assets/img/clouds.png'
-import Move from "./systems/move";
+import Systems from "./systems";
 
 
 export default class Game extends PureComponent {
+
+  constructor(props) {
+    super(props);
+    //this.gameEngine = null;
+    this.entities = Entities();
+    //const { engine } = this.entities
+    
+  }
+
   render() {
     return (
       <Background
@@ -18,12 +26,10 @@ export default class Game extends PureComponent {
         img={Clouds}
       >
         <GameEngine
+          ref={(ref) => { this.gameEngine = ref; }}
           style={{ width: 825, height: 128 }}
-          systems={[ 
-            KeyboardController( ),
-            Move 
-          ]}
-          entities={ Entities() 
+          systems={ Systems } // collection of functions ran per tick
+          entities={ this.entities
             
             //-- Notice that each entity has a unique id (required)
             //-- and a renderer property (optional). If no renderer

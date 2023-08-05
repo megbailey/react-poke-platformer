@@ -1,16 +1,19 @@
 import Player from "./components/Player";
 import Matter from 'matter-js';
-import World from "./World";
+import World from "./world";
+import Floor from "./components/Floor"
 
+let Engine = Matter.Engine;
+let Runner = Matter.Runner;
+let Render = Matter.Render;
 let Bodies = Matter.Bodies;
+
 
 //import MountainBackground from './components/Background';
 
 
 export default async () => {
-	//world.clear();
-	//const sprite = { x: 0,  y: 0, renderer: <Player /> }
-	//const world = { x: 0, y: 0, renderer: <World/> }
+
 	const floor = Bodies.rectangle(0, 128, 1700, 20, {
 		isStatic: true,
 		render: {
@@ -25,16 +28,32 @@ export default async () => {
 		}
 	  }); 
 
-	const entities = {
-		//sprite: { x: 0,  y: 0, renderer: <Player /> },
-		world: { 
-			x: 0, y: 0, width: 825, height: 1000, 
+	let engine = Engine.create({});
+
+	let world = World({
+			engine: engine,
+			width: 825,
+			height: 1000,
 			entities: [ 
+				player,
 				floor,
-				player
-			],
-			renderer: <World /> 
-		},
+			]
+		})
+	
+	/* const world = { 
+		x: 0, y: 0, 
+		width: 825, height: 1000, 
+		entities: [ 
+			player,
+			floor,
+		], 
+		renderer: c 
+	} */
+
+	const entities = {
+		physics: { engine: engine, world: world },
+		floor: { body: floor,  renderer: <Floor /> },
+		player: { body: player, renderer: <Player />},
 		
 	}
 

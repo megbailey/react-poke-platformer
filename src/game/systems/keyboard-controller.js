@@ -22,7 +22,7 @@ const space = createKeyReader([" "]);
 
 let previous = { };
 
-const KeyboardController = (Wrapped = x => x) => (entities, args) => {
+const KeyboardController = (Wrapper = x => x) => (entities, args) => {
 
   if (!args.keyboardController) {
       const input = args.input;
@@ -35,25 +35,12 @@ const KeyboardController = (Wrapped = x => x) => (entities, args) => {
         space: space(input),
       };
 
-      args.keyboardController = Object.assign({}, current, { previous });
+      args.KeyboardController = Object.assign({}, current, { previous });
 
       previous = current;
   }
-
-    const keyboardInput = args.keyboardController
-    const player = entities['sprite']
-
-    if ( keyboardInput.w && keyboardInput.previous.w !== keyboardInput.w) {
-      player.state = 'FORWARD'
-    } else if ( keyboardInput.a && keyboardInput.previous.a !== keyboardInput.a ) {
-      player.state = 'LEFT'
-    } else if ( keyboardInput.s && keyboardInput.previous.s !== keyboardInput.s ) {
-      player.state = 'BACK'
-    } else if ( keyboardInput.d && keyboardInput.previous.d !== keyboardInput.d ) {
-      player.state = 'RIGHT'
-    } 
   
-  return Wrapped(entities, args);
+  return Wrapper(entities, args);
 };
 
 export default KeyboardController;

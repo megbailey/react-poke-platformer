@@ -1,21 +1,17 @@
-//import Box from "../components/box"
-//import Cylinder from "../components/cylinder"
-import { id } from "../utils";
 
-//const boxId = (id => () => id("box"))(id(0));
-//const cylinderId = (id => () => id("cylinder"))(id(0));
+const Move = (entities, { KeyboardController }) => {
+  const player = entities['player']
 
-const Move = (entities, { keyboardController }) => {
-
-  const world = entities.world;
-  console.log(world)
-
-  /* if ((gamepadController.button0 && !gamepadController.previous.button0) || (mouseController.left && !mouseController.previous.left))
-  	entities[boxId()] = Box({ parent: scene, world, y: 5 });
-
-  if ((gamepadController.button1 && !gamepadController.previous.button1) || (mouseController.right && !mouseController.previous.right))
-  	entities[cylinderId()] = Cylinder({ parent: scene, world, y: 5 }); */
-
+   if ( KeyboardController.w && KeyboardController.previous.w !== KeyboardController.w) {
+    player.state = 'FORWARD'
+  } else if ( KeyboardController.a && KeyboardController.previous.a !== KeyboardController.a ) {
+    player.state = 'LEFT'
+  } else if ( KeyboardController.s && KeyboardController.previous.s !== KeyboardController.s ) {
+    player.state = 'BACK'
+  } else if ( KeyboardController.d && KeyboardController.previous.d !== KeyboardController.d ) {
+    player.state = 'RIGHT'
+  }  
+ 
   return entities;
 };
 
