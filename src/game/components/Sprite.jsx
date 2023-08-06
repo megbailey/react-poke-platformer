@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Tile from './Tile';
 
 const Sprite = (props) => {
-    const { src, states, scale, tile, framesPerStep, startWidth } = props
-    const { width, height } = tile
+    const { src, tile, states, scale, framesPerStep, startWidth } = props
+    const { width, height, x, y } = tile
     const [ state, setState ] = useState(0);
     let tick = 0;
    
@@ -26,7 +26,18 @@ const Sprite = (props) => {
         }
     }, [state])
 
-    return <Tile src={src} state={state} width={width} height={height} scale={scale} start={startWidth} />
+    return (
+        <Tile 
+            src={src} 
+            state={state} 
+            width={width} 
+            height={height} 
+            x={x}
+            y={y}
+            scale={scale} 
+            start={startWidth} 
+        />
+    )
 }
 
 export default Sprite;

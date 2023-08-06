@@ -20,7 +20,7 @@ export default class Game extends PureComponent {
   render() {
     return (
       <Background
-        colorHex="#8abdf0"
+        colorhex="#8abdf0"
         width={825}
         height={128}
         img={Clouds}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Sprite from './Sprite';
-import sprite1 from '../../assets/img/trainer-sprite-1.png'
 
 const frontFrames = {
     startWidth: 1,
@@ -28,13 +27,22 @@ const playerState = {
 }
 
 const Player = ( props ) => {
+    const { src, state, body } = props
+
+    const width = body.bounds.max.x - body.bounds.min.x;
+    const height = body.bounds.max.y - body.bounds.min.y;
+    const x = body.position.x;
+    const y = body.position.y
+
     return (
         <Sprite
-            {...playerState[props.state]}
-            src={sprite1}
+            {...playerState[state]}
+            src={src}
             tile={{
-                width: 16,
-                height: 16
+                width: width,
+                height: height,
+                x: x,
+                y: y,
             }}
             scale={1.5}
             framesPerStep={16}
