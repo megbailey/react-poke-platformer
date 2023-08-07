@@ -18,7 +18,7 @@ const w = createKeyReader(["w", "W", "ArrowUp"]);
 const a = createKeyReader(["a", "A", "ArrowLeft"]);
 const s = createKeyReader(["s", "S", "ArrowDown"]);
 const d = createKeyReader(["d", "D", "ArrowRight"]);
-const space = createKeyReader([" "]);
+const space = createKeyReader([" ", "j", "J"]);
 
 let previous = { };
 

@@ -1,3 +1,4 @@
+import Matter from 'matter-js';
 
 const Move = (entities, { KeyboardController }) => {
   const player = entities['player']
@@ -12,6 +13,13 @@ const Move = (entities, { KeyboardController }) => {
     player.state = 'RIGHT'
   }  
  
+  if (KeyboardController.space  && KeyboardController.previous.space !== KeyboardController.space ) {
+    Matter.Body.setVelocity( player.body, {
+      x: player.body.velocity.x,
+      y: -10
+    });
+  }
+
   return entities;
 };
 

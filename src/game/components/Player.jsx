@@ -29,8 +29,8 @@ const playerState = {
 const Player = ( props ) => {
     const { src, state, body } = props
 
-    const width = body.bounds.max.x - body.bounds.min.x;
-    const height = body.bounds.max.y - body.bounds.min.y;
+    /* const width = body.bounds.max.x - body.bounds.min.x;
+    const height = body.bounds.max.y - body.bounds.min.y; */
     const x = body.position.x;
     const y = body.position.y
 
@@ -39,8 +39,8 @@ const Player = ( props ) => {
             {...playerState[state]}
             src={src}
             tile={{
-                width: width,
-                height: height,
+                width: 16,
+                height: 16,
                 x: x,
                 y: y,
             }}

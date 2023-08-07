@@ -24,8 +24,8 @@ export default async () => {
 	let world = World({
 			engine: engine,
 			entities: [ 
-				player,
 				floor,
+				player,
 			]
 		})
 	
