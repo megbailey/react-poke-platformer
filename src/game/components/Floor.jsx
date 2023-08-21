@@ -1,35 +1,27 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Container = styled.div`
-    background-color: blue;
-    position: absolute;
-    left: ${props =>` ${props.x}px`};
-    top: ${props =>` ${props.y}px`};
-    width: ${props =>` ${props.width}px`};
-    height: ${props =>` ${props.height}px`};
-    overflow: hidden;
-`;
-
-const Image = styled.img``;
 
 const Floor = (props) => {
-    const { src, body} = props
+    const { src, body, color } = props
 
     const width = body.bounds.max.x - body.bounds.min.x;
     const height = body.bounds.max.y - body.bounds.min.y;
-    const x = body.position.x;
-    const y = body.position.y
+    const x = body.position.x - width / 2;
+    const y = body.position.y;
     
     return (
-       <Container 
-            width={width} 
-            height={height}
-            x={x} 
-            y={y} 
+        <div 
+            style={{
+                backgroundColor: color,
+                position: 'absolute',
+                left: `${x}px`,
+                top: `${y}px`,
+                width: `${width}px`,
+                height: `${height}px`
+            }}  
         >
-            <Image src={src} />
-       </Container>
+            <img src={src} />
+        </div>
+        
     );
 }
 

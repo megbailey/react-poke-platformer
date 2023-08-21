@@ -1,17 +1,39 @@
-import React, { useState } from 'react';
+import React, { lazy, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 
-const Background = styled.div`
-    background-color: ${props => `${props.colorhex}`};
-    background-image: url(${props => props.img}) ;
-    width: ${props => `${props.width}px`};
-    height: ${props => `${props.height}px`};
-    overflow: hidden;
-    transform: scale(${ props => `${props.scale}, ${props.scale}`});
-    transform-origin: top left;
-`; 
+const Background = ( props ) => {
+    const { width, height, colorHex, img, children } = props
+    const { src, height: imgHeight, width: imgWidth } = img
+
+    return (
+      <>
+      {/* <div 
+        className='background' 
+        style={{
+            backgroundColor: `${colorHex}`,
+            width: `${width}px`,
+            height: `${height}px`,
+            overflow: 'hidden',
+            transformOrigin: 'top left'
+        }}
+    > */}
+         <img
+            style={{
+                width: `${imgWidth}px`,
+                height: `${imgHeight}px`,
+                overflow: 'hidden',
+                transformOrigin: 'top left',
+                backgroundColor: `${colorHex}`,
+            }}
+            src={src}
+        />
+        {children}
+     {/*  </div> */}
+      </>
+    )
+    
+}
 
 
 export default Background
