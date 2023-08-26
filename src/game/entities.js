@@ -3,28 +3,25 @@ import Matter from 'matter-js';
 import World from "./world";
 import Floor from "./components/Floor"
 import sprite1 from '../assets/img/trainer-sprite-1.png'
-import { MAX_HEIGHT, MAX_WIDTH } from "./constants";
-
 
 let Engine = Matter.Engine;
 let Bodies = Matter.Bodies;
 
 
-export default async () => {
-
-	const floor = Bodies.rectangle(MAX_WIDTH/2, MAX_HEIGHT, MAX_WIDTH, 30 , { 
-		isStatic: true 
+export default async ( state ) => {
+	const floor = Bodies.rectangle(state.width/2, state.height, state.width, 30, {
+		isStatic: true,
 	});  
-	const wallRight = Bodies.rectangle(MAX_WIDTH, MAX_HEIGHT/2, 50, MAX_HEIGHT, { 
+	const wallRight = Bodies.rectangle( state.width, state.height/2, 50, state.height, {
 		isStatic: true,
 	});
-	const wallLeft = Bodies.rectangle(-25, MAX_HEIGHT/2, 50,  MAX_HEIGHT, {
+	const wallLeft = Bodies.rectangle(-25, state.height/2, 50,  state.height, {
 		isStatic: true,
 	});
  	const ceiling = Bodies.rectangle(0, 0, 50, 50, {
 		isStatic: true,
 	});
-	const player = Bodies.rectangle(400, 0, 16, 16, {
+	const player = Bodies.rectangle(state.width/2, 0, 16, 16, {
 		restitution: 0.8, // bounce
 	}); 
 
@@ -50,8 +47,8 @@ export default async () => {
 		physics: { engine: engine, world: world },
 		floor: { body: floor,  color: '#FF7300', renderer: <Floor /> },
 		player: { body: player, src: sprite1, renderer: <Player /> },
-		wallLeft: { body: wallLeft,  /* color: 'blue' */ },
-		wallRight: { body: wallRight,  /* color: 'blue' */ },
+		wallLeft: { body: wallLeft },
+		wallRight: { body: wallRight },
 		ceiling: { body: ceiling }
 
 

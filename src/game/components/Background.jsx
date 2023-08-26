@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 const Background = ( props ) => {
     const { width, height, colorHex, img, children } = props
-    const { src, height: imgHeight, width: imgWidth } = img
+    //const { src, height: imgHeight, width: imgWidth } = img
 
     return (
       <>
-      {/* <div 
+      <div 
         className='background' 
         style={{
             backgroundColor: `${colorHex}`,
@@ -17,8 +17,8 @@ const Background = ( props ) => {
             overflow: 'hidden',
             transformOrigin: 'top left'
         }}
-    > */}
-         <img
+    >
+         {/* <img
             style={{
                 width: `${imgWidth}px`,
                 height: `${imgHeight}px`,
@@ -27,9 +27,9 @@ const Background = ( props ) => {
                 backgroundColor: `${colorHex}`,
             }}
             src={src}
-        />
+        /> */}
         {children}
-     {/*  </div> */}
+      </div>
       </>
     )
     

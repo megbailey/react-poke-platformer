@@ -7,6 +7,7 @@ const World = ( props ) => {
     if ( entities.length > 0 ){
       Matter.World.add( engine.world, entities );
     } 
+    
 
   return engine
 };
