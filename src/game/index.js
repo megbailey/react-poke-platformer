@@ -4,7 +4,7 @@ import Entities from "./entities";
 import Systems from "./systems";
 import Background from './components/Background'
 import Clouds from '../assets/img/clouds.png'
-import DesertA from '../assets/img/desert_a.png'
+import DesertA from '../assets/img/desert_a.svg'
 import MountainA from '../assets/img/mountains_a.png'
 
 const Game = memo(function Game(props) {
@@ -39,26 +39,26 @@ const Game = memo(function Game(props) {
 
 export default Game;
 
-const DesertBackground = ({children}) => {
+const DesertBackground = ({width, height, children}) => {
   return (
     <Background
         colorHex="#f4e474"
-        img={{
-          src: DesertA
-        }}
+        src={DesertA}
+        width={width}
+        height={height}
     >
       {children}
     </Background>
   )
 }
 
-const CloudsBackground = ({children}) => {
+const CloudsBackground = ({width, height, children}) => {
   return (
     <Background
         colorHex="#8abdf0"
-        img={{
-          src: Clouds
-        }}
+        width={width}
+        height={height}
+        src={Clouds}
     >
       {children}
     </Background>
@@ -69,6 +69,8 @@ const MountainsBackground = ({ width, height, children }) => {
   return (
     <Background
         colorHex="#8abdf0"
+        width={width}
+        height={height}
         /* img={{
           width: width,
           height: height,

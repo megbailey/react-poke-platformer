@@ -1,36 +1,29 @@
-import React, { lazy, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 
 const Background = ( props ) => {
-    const { width, height, colorHex, img, children } = props
-    //const { src, height: imgHeight, width: imgWidth } = img
+    const { src, width, height, colorHex, children } = props
 
     return (
-      <>
       <div 
-        className='background' 
         style={{
-            backgroundColor: `${colorHex}`,
             width: `${width}px`,
             height: `${height}px`,
+            backgroundColor: `${colorHex}`,
             overflow: 'hidden',
-            transformOrigin: 'top left'
         }}
     >
-         {/* <img
+         <img
             style={{
-                width: `${imgWidth}px`,
-                height: `${imgHeight}px`,
                 overflow: 'hidden',
                 transformOrigin: 'top left',
                 backgroundColor: `${colorHex}`,
             }}
             src={src}
-        /> */}
+        />
         {children}
       </div>
-      </>
     )
     
 }
