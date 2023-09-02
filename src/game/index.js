@@ -1,10 +1,11 @@
 import React, { memo, createContext, useState, useRef, useEffect } from "react";
 import { GameEngine } from "react-game-engine";
-import Entities from "./entities";
-import Systems from "./systems";
-import Background from './components/Background'
+import { hot } from "react-hot-loader";
+import Entities from "./entities.js";
+import Systems from "./systems/index.js";
+import Background from './components/Background.jsx'
 import Clouds from '../assets/img/clouds.png'
-import DesertA from '../assets/img/desert_a.svg'
+//import DesertA from '../assets/svg/desert_a.svg'
 import MountainA from '../assets/img/mountains_a.png'
 
 const Game = memo(function Game(props) {
@@ -37,9 +38,9 @@ const Game = memo(function Game(props) {
   );
 })
 
-export default Game;
+export default hot(module)(Game);
 
-const DesertBackground = ({width, height, children}) => {
+/* const DesertBackground = ({width, height, children}) => {
   return (
     <Background
         colorHex="#f4e474"
@@ -50,7 +51,7 @@ const DesertBackground = ({width, height, children}) => {
       {children}
     </Background>
   )
-}
+} */
 
 const CloudsBackground = ({width, height, children}) => {
   return (

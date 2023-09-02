@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Sprite from './Sprite';
+import Sprite from './Sprite.jsx';
 
 const frontFrames = {
     startWidth: 1,

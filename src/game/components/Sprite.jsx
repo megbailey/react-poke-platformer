@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Tile from './Tile';
+import Tile from './Tile.jsx';
 
 const Sprite = (props) => {
     const { src, tile, states, scale, framesPerStep, startWidth } = props
