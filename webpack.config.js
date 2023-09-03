@@ -7,8 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProduction = process.env.NODE_ENV == 'production';
 const port = process.env.PORT || 3000;
 
-//const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
-
+const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 
 const config = {
@@ -17,7 +16,7 @@ const config = {
         path: path.resolve(__dirname, 'build'),
     },
     devServer: {
-        open: true,
+        //open: true,
         port: port,
         hot: true
     },
@@ -34,12 +33,6 @@ const config = {
     },
     module: {
         rules: [
-            /* {
-                test: /\.html$/i,
-                use: {
-                    loader: 'html-loader',
-                },
-            }, */
             {
                 test: /\.(js|jsx)$/i,
                 exclude: /nodeModules/,
@@ -60,12 +53,23 @@ const config = {
             },
             {
                 test: /\.css$/i,
-                use: ['style-loader','css-loader'],
+                use: [stylesHandler,'css-loader'],
             },
             {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-                type: 'asset',
+                test: /\.(png|jpg|gif)$/i,
+                loader: 'file-loader',
+                options: {
+                  name: 'assets/img/[name].[ext]'
+                }
             },
+            {
+                test: /\.(svg)$/i,
+                loader: 'file-loader',
+                options: {
+                  name: 'assets/[ext]/[name].[ext]'
+                }
+            },
+            
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
