@@ -1,8 +1,11 @@
 {
-    "presets": ["@babel/preset-env", "@babel/preset-react"],
-    "plugins": [
-      "@babel/plugin-syntax-dynamic-import",
-      "@babel/transform-class-properties",
-      "@babel/plugin-transform-runtime"
-    ]
-  }
+  "plugins": [
+    "@babel/syntax-dynamic-import", 
+    "@babel/plugin-syntax-jsx", 
+    "@babel/plugin-transform-class-properties"
+  ],
+  "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+  ]
+}

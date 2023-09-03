@@ -1,6 +1,5 @@
 import React, { memo, createContext, useState, useRef, useEffect } from "react";
 import { GameEngine } from "react-game-engine";
-import { hot } from "react-hot-loader";
 import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 import Background from './components/Background.jsx'
@@ -38,7 +37,7 @@ const Game = memo(function Game(props) {
   );
 })
 
-export default hot(module)(Game);
+export default Game;
 
 /* const DesertBackground = ({width, height, children}) => {
   return (
