@@ -56,20 +56,9 @@ const config = {
                 use: [stylesHandler,'css-loader'],
             },
             {
-                test: /\.(png|jpg|gif)$/i,
-                loader: 'file-loader',
-                options: {
-                  name: 'assets/img/[name].[ext]'
-                }
-            },
-            {
-                test: /\.(svg)$/i,
-                loader: 'file-loader',
-                options: {
-                  name: 'assets/[ext]/[name].[ext]'
-                }
-            },
-            
+                test: /\.(png|jp(e*)g|svg|gif)$/,
+                type: "asset/resource",
+            }
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
