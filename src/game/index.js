@@ -4,13 +4,14 @@ import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 import Background from './components/Background.jsx'
 import Clouds from '../assets/img/clouds.png'
-//import DesertA from '../assets/svg/desert_a.svg'
+import DesertA from '../assets/svg/desert_a.svg'
 import MountainA from '../assets/img/mountains_a.png'
 
 const Game = memo(function Game(props) {
   const [windowState, setWindowState] = useState({ width: window.innerWidth, height: (window.innerHeight / 3) });
   const gameEngine = useRef(null);
   
+  console.log(DesertA)
   useEffect(() => {
     window.addEventListener('resize', updateDimensions);
   },[])
@@ -22,7 +23,7 @@ const Game = memo(function Game(props) {
   }
 
   return (
-    <MountainsBackground
+    <DesertBackground
       width={windowState.width}
       height={windowState.height}
     >
@@ -33,13 +34,13 @@ const Game = memo(function Game(props) {
         entities={Entities({...windowState})}
       >
       </GameEngine>
-    </MountainsBackground>
+    </DesertBackground>
   );
 })
 
 export default Game;
 
-/* const DesertBackground = ({width, height, children}) => {
+ const DesertBackground = ({width, height, children}) => {
   return (
     <Background
         colorHex="#f4e474"
@@ -50,7 +51,7 @@ export default Game;
       {children}
     </Background>
   )
-} */
+}
 
 const CloudsBackground = ({width, height, children}) => {
   return (
