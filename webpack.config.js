@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProduction = process.env.NODE_ENV == 'production';
 const port = process.env.PORT || 3000;
 
-const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
+//const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 
 
@@ -29,18 +29,38 @@ const config = {
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
+    resolve: {
+        extensions: [ '.js', '.jsx']
+    },
     module: {
         rules: [
+            /* {
+                test: /\.html$/i,
+                use: {
+                    loader: 'html-loader',
+                },
+            }, */
             {
                 test: /\.(js|jsx)$/i,
                 exclude: /nodeModules/,
                 use: {
                     loader: 'babel-loader',
-                }
+                    options: {
+                        presets:[
+                            "@babel/preset-env",
+                            "@babel/preset-react"
+                        ],
+                        plugins:[
+                            "@babel/syntax-dynamic-import", 
+                            "@babel/plugin-syntax-jsx", 
+                            "@babel/plugin-transform-class-properties"
+                        ],
+                    }
+                },
             },
             {
                 test: /\.css$/i,
-                use: [stylesHandler,'css-loader'],
+                use: ['style-loader','css-loader'],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,

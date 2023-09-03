@@ -5,8 +5,8 @@ import Game from "./game/index.js";
 /* import * as ServiceWorker from './service-worker.js'
 import reportWebVitals from './reportWebVitals.js'; */
 
-const root = document.getElementById('root');
-ReactDOM.render(<Game />, root);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Game />);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

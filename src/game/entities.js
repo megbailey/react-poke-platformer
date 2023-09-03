@@ -1,3 +1,4 @@
+import React from 'react';
 import Player from "./components/Player.jsx";
 import Matter from 'matter-js';
 import World from "./world.js";
