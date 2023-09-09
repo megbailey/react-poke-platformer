@@ -14,10 +14,3 @@ export const log = label => data => {
 	console.log(label, data);
 	return data;
 }
-
-/* export const loadSVGSrc = ( pathToSVG ) => {
-	const reqSvgs = require.context ( pathToSVG, true, /\.svg$/ )
-	const allSvgFilepaths = reqSvgs.keys()
-	console.log(allSvgFilepaths)
-
-}; */

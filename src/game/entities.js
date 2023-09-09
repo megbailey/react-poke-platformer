@@ -1,21 +1,17 @@
 import React from 'react';
-import Player from "./components/Player.jsx";
 import Matter from 'matter-js';
 import World from "./world.js";
+
+import Player from "./components/Player.jsx";
 import Floor from "./components/Floor.jsx";
+import Platform from "./components/Platform.jsx";
+
 import sprite1 from '../assets/img/trainer-sprite-1.png';
-import { loadSVGSrc } from "./utils";
 
 let Engine = Matter.Engine;
 let Bodies = Matter.Bodies;
-let Common = Matter.Common;
-let Vertices = Matter.Vertices;
-let Svg = Matter.Svg;
-
-
-const select = function(root, selector) {
-	return Array.prototype.slice.call(root.querySelectorAll(selector));
-};
+//let Common = Matter.Common;
+//let Vertices = Matter.Vertices;
 
 
 export default async ( state ) => {
@@ -35,20 +31,7 @@ export default async ( state ) => {
 		restitution: 0.8, // bounce
 	}); 
 
-	// provide concave decomposition support library
-	//Common.setDecomp(require('poly-decomp'));
 	
-	//loadSVGSrc('../assets/svg/platform-1.svg')
-	/* const bodies = [
-		Matter.Bodies.rectangle(400, 210, 810, 60, {isStatic: true}),
-		...[...document.querySelectorAll("SVG")].map(path => {
-		  const body = Matter.Bodies.fromVertices(
-			100, 80, Matter.Svg.pathToVertices(path), {}, true
-		  );
-		  Matter.Body.scale(body, 0.2, 0.2);
-		  return body;
-		})
-	  ]; */
 
 	let engine = Engine.create({});
 
@@ -72,13 +55,12 @@ export default async ( state ) => {
 	const entities = {
 		physics: { engine: engine, world: world },
 		floor: { body: floor,  color: '#FF7300', renderer: <Floor /> },
+		text:{ /*  body: bodies, */ width: 50, height: 50, },
 		player: { body: player, src: sprite1, renderer: <Player /> },
 		wallLeft: { body: wallLeft },
 		wallRight: { body: wallRight },
 		ceiling: { body: ceiling },
-		//text:{ /*  body: bodies, */ renderer: <SVG />  }
-
-
+		
 	}
 
 	return entities;

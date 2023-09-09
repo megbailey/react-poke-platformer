@@ -3,15 +3,15 @@ import { GameEngine } from "react-game-engine";
 import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 import Background from './components/Background.jsx'
+
 import Clouds from '../assets/img/clouds.png'
-import DesertA from '../assets/svg/desert_a.svg'
+import DesertA from '../assets/img/desert_a.png'
 import MountainA from '../assets/img/mountains_a.png'
 
 const Game = memo(function Game(props) {
   const [windowState, setWindowState] = useState({ width: window.innerWidth, height: (window.innerHeight / 3) });
   const gameEngine = useRef(null);
   
-  console.log(DesertA)
   useEffect(() => {
     window.addEventListener('resize', updateDimensions);
   },[])
@@ -23,7 +23,7 @@ const Game = memo(function Game(props) {
   }
 
   return (
-    <DesertBackground
+    <CloudsBackground
       width={windowState.width}
       height={windowState.height}
     >
@@ -34,7 +34,7 @@ const Game = memo(function Game(props) {
         entities={Entities({...windowState})}
       >
       </GameEngine>
-    </DesertBackground>
+    </CloudsBackground>
   );
 })
 
@@ -43,7 +43,7 @@ export default Game;
  const DesertBackground = ({width, height, children}) => {
   return (
     <Background
-        colorHex="#f4e474"
+        color="#f4e474"
         src={DesertA}
         width={width}
         height={height}
@@ -56,10 +56,13 @@ export default Game;
 const CloudsBackground = ({width, height, children}) => {
   return (
     <Background
-        colorHex="#8abdf0"
+        color="#8abdf0"
         width={width}
         height={height}
         src={Clouds}
+        style={{
+          backgroundPosition: 'center bottom'
+        }}
     >
       {children}
     </Background>
@@ -69,14 +72,13 @@ const CloudsBackground = ({width, height, children}) => {
 const MountainsBackground = ({ width, height, children }) => {
   return (
     <Background
-        colorHex="#8abdf0"
+        color="#8abdf0"
         width={width}
         height={height}
-        /* img={{
-          width: width,
-          height: height,
-          src: MountainA
-        }} */
+        src={MountainA}
+        style={{
+          backgroundPosition: 'center bottom'
+        }}
     >
       {children}
     </Background>

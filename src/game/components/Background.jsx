@@ -1,37 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ReactSVG } from 'react-svg'
+import '../../assets/styles/background.css'
 
 
 const Background = ( props ) => {
-    const { src, width, height, colorHex, children } = props
+    const { src, width, height, color, style, children } = props
 
-    const matches = src.match(/(.*)(.svg)$/g)
-    // if the given src is a svg   
     return (
       <div 
+        className='c-background'
         style={{
-            width: `${width}px`,
-            height: `${height}px`,
-            backgroundColor: `${colorHex}`,
-            overflow: 'hidden',
+          ...style,
+          width: `${width}px`,
+          height: `${height}px`,
+          backgroundColor: `${color}`,
+          overflow: 'hidden',
+          backgroundImage: `url(${src})`,
+          backgroundRepeat: 'repeat-x',
         }}
-    >
-      { matches !== null &&
-        // if the given src is a svg
-        <ReactSVG src={src} />
-      }
-        { matches == null && 
-          <img
-              style={{
-                  overflow: 'hidden',
-                  transformOrigin: 'top left',
-                  backgroundColor: `${colorHex}`,
-              }}
-              src={src}
-          />
-        }
-        {children}
+      >
+          {children}
       </div>
     )
     

@@ -56,6 +56,7 @@ const config = {
                 use: [stylesHandler,'css-loader'],
             },
             {
+                // https://webpack.js.org/guides/asset-modules/
                 test: /\.(png|jp(e*)g|svg|gif)$/,
                 type: "asset/resource",
             }
