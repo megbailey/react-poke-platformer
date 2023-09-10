@@ -23,7 +23,7 @@ const Game = memo(function Game(props) {
   }
 
   return (
-    <CloudsBackground
+    <DesertBackground
       width={windowState.width}
       height={windowState.height}
     >
@@ -34,7 +34,7 @@ const Game = memo(function Game(props) {
         entities={Entities({...windowState})}
       >
       </GameEngine>
-    </CloudsBackground>
+    </DesertBackground>
   );
 })
 
