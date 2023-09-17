@@ -4,12 +4,12 @@ import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 import Background from './components/Background.jsx'
 
-import Clouds from '../assets/img/clouds.png'
+import Trees from '../assets/img/trees.png'
 import DesertA from '../assets/img/desert_a.png'
 import MountainA from '../assets/img/mountains_a.png'
 
 const Game = memo(function Game(props) {
-  const [windowState, setWindowState] = useState({ width: window.innerWidth, height: (window.innerHeight / 3) });
+  const [windowState, setWindowState] = useState({ width: window.innerWidth, height: (window.innerHeight / 2) });
   const gameEngine = useRef(null);
   
   useEffect(() => {
@@ -23,7 +23,7 @@ const Game = memo(function Game(props) {
   }
 
   return (
-    <DesertBackground
+    <ForestBackground
       width={windowState.width}
       height={windowState.height}
     >
@@ -34,32 +34,32 @@ const Game = memo(function Game(props) {
         entities={Entities({...windowState})}
       >
       </GameEngine>
-    </DesertBackground>
+    </ForestBackground>
   );
 })
 
 export default Game;
 
- const DesertBackground = ({width, height, children}) => {
+/*  const DesertBackground = ({width, height, children}) => {
   return (
     <Background
         color="#f4e474"
         src={DesertA}
         width={width}
-        height={height}
+        //height={height}
     >
       {children}
     </Background>
   )
-}
+} */
 
-const CloudsBackground = ({width, height, children}) => {
+const ForestBackground = ({width, height, children}) => {
   return (
     <Background
         color="#8abdf0"
         width={width}
         height={height}
-        src={Clouds}
+        src={Trees}
         style={{
           backgroundPosition: 'center bottom'
         }}
@@ -69,7 +69,7 @@ const CloudsBackground = ({width, height, children}) => {
   )
 }
 
-const MountainsBackground = ({ width, height, children }) => {
+/* const MountainsBackground = ({ width, height, children }) => {
   return (
     <Background
         color="#8abdf0"
@@ -83,4 +83,4 @@ const MountainsBackground = ({ width, height, children }) => {
       {children}
     </Background>
   )
-}
+} */

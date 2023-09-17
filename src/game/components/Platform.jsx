@@ -3,24 +3,37 @@ import PropTypes from 'prop-types';
 
 
 const Platform = ( props ) => {
-    const { src, body, border, style } = props
+    const { src, body, width, height, border, style } = props
 
+    let x, y;
+    if (body.type === "body") {
+        x = body.position.x - (width /2);
+        y = body.position.y;
+    }
+
+    //height = auto; width = auto;
+    //let angle = body.angle;
+    //let degrees = angle * (180 / Math.PI);
+
+    //console.log(body, width, height)
     return (
-        <img 
+        <div 
             className='c-platform'
             style={{ 
                 ...style,
-                top: `${body.position.y}px`,
-                left: `${body.position.x}px`,
+                height: `${height}px`,
+                width: `${width}px`,
+                transform: `translate(${x}px, ${y }px)`,
                 borderStyle: border ? 'solid' : 'none',
                 position: 'absolute',
             }}
-            src={src}
-      />
+      >
+        <img src={src} />
+    </div>
           
     )
     
 }
 
 
-export default Platform
+export default Platform;

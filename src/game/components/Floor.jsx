@@ -11,16 +11,16 @@ const Floor = (props) => {
     return (
         <div 
             style={{
-                backgroundColor: color,
-                position: 'absolute',
-                left: `${x}px`,
-                top: `${y}px`,
+                //backgroundColor: color,
+                backgroundImage: `url(${src})`,
+                transform: `translate(${x}px, ${y - 10}px)`,
+                position: `absolute`,
                 width: `${width}px`,
                 height: `${height}px`
             }}  
-        >
-            <img src={src} />
-        </div>
+        />
+           
+        
         
     );
 }
