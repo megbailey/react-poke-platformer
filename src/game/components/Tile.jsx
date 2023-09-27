@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { RunningContext } from '../index.js';
 
 const Tile = (props) => {
     const { src, x, y, width, height, scale, state, start} = props
     const left = width * state + start
+    const runningState = useContext(RunningContext);
     
     return (
-       <div style={{
+      <div style={{
+            display: runningState === false ? 'none' : null,
             left: `${x}px`,
             top: `${y}px`,
             width: `${width}px`,
