@@ -7,13 +7,19 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProduction = process.env.NODE_ENV == 'production';
 const port = process.env.PORT || 3000;
 
+const library = 'poke-platformer'
+const filename = isProduction ? `${library}.min.js` : `${library}.js`
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 
 const config = {
-    entry: './src/index.js',
+    entry: './src/game/index.js',
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, `lib/${library}`),
+        filename: `${filename}`,
+        library: `${library}`,
+        libraryTarget: 'umd',
+        umdNamedDefine: true
     },
     devServer: {
         //open: true,
@@ -24,10 +30,13 @@ const config = {
         new HtmlWebpackPlugin({
             template: './public/index.html',
         }),
-
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
+    externals: {
+        'react': 'react',
+        'react-dom': 'react-dom',
+      },
     resolve: {
         extensions: [ '.js', '.jsx']
     },
