@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV == 'production';
 const port = process.env.PORT || 3000;
 
 const library = 'poke-platformer'
-const filename = isProduction ? `${library}.min.js` : `${library}.js`
+const filename = 'index.js'
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 

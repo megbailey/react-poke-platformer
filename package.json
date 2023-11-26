@@ -2,6 +2,7 @@
   "name": "poke-platformer",
   "version": "1.0.0",
   "private": true,
+  "main": "index.js",
   "dependencies": {
     "@babel/runtime": "^7.22.11",
     "@popmotion/popcorn": "^0.4.4",
