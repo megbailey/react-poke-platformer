@@ -67,7 +67,7 @@ const config = {
             {
                 // https://webpack.js.org/guides/asset-modules/
                 test: /\.(png|jp(e*)g|svg|gif)$/,
-                type: "asset/resource",
+                type: "asset/inline",
             }
 
             // Add your rules for custom modules here
