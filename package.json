@@ -3,31 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
-  "dependencies": {
-    "@babel/runtime": "^7.22.11",
-    "@popmotion/popcorn": "^0.4.4",
-    "core-js": "^3.4.1",
-    "lodash": "^4.17.21",
-    "matter-js": "^0.19.0",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-game-engine": "^1.2.0",
-    "react-scripts": "5.0.1",
-    "regenerator-runtime": "^0.14.0",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
     "start": "run-script-os",
     "start:win32": "set 'BROWSER=chrome' && react-scripts start",
     "start:darwin:linux": "BROWSER='google chrome' react-scripts start",
     "start:webpack": "webpack-dev-server --config webpack.config.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build": "npm i && webpack --mode=production --node-env=production",
+    "build": "npm i && webpack --mode=production",
     "build:dev": "npm i && webpack --mode=development",
     "watch": "webpack --watch",
     "serve": "webpack serve --mode development"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +35,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.22.11",
+    "@popmotion/popcorn": "^0.4.4",
+    "core-js": "^3.4.1",
+    "lodash": "^4.17.21",
+    "matter-js": "^0.19.0",
+    "prop-types": "^15.8.1",
+    "react-game-engine": "^1.2.0",
+    "regenerator-runtime": "^0.14.0",
+    "web-vitals": "^2.1.4"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.11",

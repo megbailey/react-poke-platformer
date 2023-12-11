@@ -1,4 +1,3 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -22,7 +21,6 @@ const config = {
         umdNamedDefine: true
     },
     devServer: {
-        //open: true,
         port: port,
         hot: true
     },
@@ -36,9 +34,10 @@ const config = {
     externals: {
         'react': 'react',
         'react-dom': 'react-dom',
+        'react-scripts': 'react-scripts'
       },
     resolve: {
-        extensions: [ '.js', '.jsx']
+        extensions: [ '.js', '.jsx'],
     },
     module: {
         rules: [

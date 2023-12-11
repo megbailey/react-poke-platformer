@@ -6,7 +6,12 @@ import Game from "./game/index.js";
 import reportWebVitals from './reportWebVitals.js'; */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Game />);
+root.render(
+    <Game 
+        width={1200}
+        height={400}
+    />
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
