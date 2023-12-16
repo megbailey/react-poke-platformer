@@ -10,6 +10,7 @@
     "start:webpack": "webpack-dev-server --config webpack.config.js",
     "build": "npm i && webpack --mode=production",
     "build:dev": "npm i && webpack --mode=development",
+    "prepare": "webpack --mode=production",
     "watch": "webpack --watch",
     "serve": "webpack serve --mode development"
   },
