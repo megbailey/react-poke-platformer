@@ -14,7 +14,7 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 const config = {
     entry: './src/game/index.js',
     output: {
-        path: path.resolve(__dirname, `lib/${library}`),
+        path: path.resolve(__dirname, `lib`),
         filename: `${filename}`,
         library: `${library}`,
         libraryTarget: 'umd',

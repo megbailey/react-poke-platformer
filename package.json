@@ -2,7 +2,7 @@
   "name": "poke-platformer",
   "version": "1.0.0",
   "private": true,
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "start": "run-script-os",
     "start:win32": "set 'BROWSER=chrome' && react-scripts start",
@@ -15,7 +15,7 @@
     "serve": "webpack serve --mode development"
   },
   "files": [
-    "lib/poke-platformer/*"
+    "lib/index.js"
   ],
   "engines": {
     "npm": ">=8.0.0",
