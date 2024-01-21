@@ -8,12 +8,15 @@
     "start:win32": "set 'BROWSER=chrome' && react-scripts start",
     "start:darwin:linux": "BROWSER='google chrome' react-scripts start",
     "start:webpack": "webpack-dev-server --config webpack.config.js",
-    "build": "npm i && webpack --mode=production",
-    "build:dev": "npm i && webpack --mode=development",
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
     "prepare": "npm run build",
     "watch": "webpack --watch",
     "serve": "webpack serve --mode development"
   },
+  "files": [
+    "lib/poke-platformer/*"
+  ],
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"
