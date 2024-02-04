@@ -7,14 +7,14 @@ const isProduction = process.env.NODE_ENV == 'production';
 const port = process.env.PORT || 3000;
 
 const library = 'poke-platformer'
-const filename = 'index.js'
+const filename = 'bundle.js'
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 
 const config = {
     entry: './src/game/index.js',
     output: {
-        path: path.resolve(__dirname, `lib`),
+        path: path.resolve(__dirname, `dist`),
         filename: `${filename}`,
         library: `${library}`,
         libraryTarget: 'umd',
@@ -31,11 +31,6 @@ const config = {
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
-    externals: {
-        'react': 'react',
-        'react-dom': 'react-dom',
-        'react-scripts': 'react-scripts'
-      },
     resolve: {
         extensions: [ '.js', '.jsx'],
     },
@@ -54,7 +49,8 @@ const config = {
                         plugins:[
                             "@babel/syntax-dynamic-import", 
                             "@babel/plugin-syntax-jsx", 
-                            "@babel/plugin-transform-class-properties"
+                            "@babel/plugin-transform-class-properties",
+                            "@babel/plugin-transform-runtime"
                         ],
                     }
                 },
@@ -80,10 +76,16 @@ module.exports = () => {
         config.mode = 'production';
         
         config.plugins.push(new MiniCssExtractPlugin());
-        
+        // don't include react in library export so that it doesnt conflict when being used by other projects
+        config.externals = {
+            'react': 'react',
+            'react-dom': 'react-dom',
+        }
         
     } else {
         config.mode = 'development';
+        // If in development, entry point is one level higher so that app will render at div <div id='root'></div>
+        config.entry = './src/index.js';
     }
     return config;
 };
