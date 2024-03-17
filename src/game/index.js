@@ -1,5 +1,6 @@
-import React, { memo, createContext, useState, useRef, useEffect, useContext } from "react";
+import React, { memo, useState, useRef, useEffect } from "react";
 import { GameEngine } from "react-game-engine";
+import { useSelector } from "react-redux";
 import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 import Background from './components/Background.jsx'
@@ -9,11 +10,9 @@ import DesertA from '../assets/img/desert_a.png'
 import MountainA from '../assets/img/mountains_a.png'
 import Menu from "./components/Menu.jsx";
 
-export const RunningContext = createContext(null)
-
 const Game = memo(function Game({ width, height }) {
-  const [running, setRunningState] = useState(false)
   const gameEngine = useRef(null);
+  const gameState = useSelector((state) => state.game.value)
   
 /*   useEffect(() => {
     window.addEventListener('resize', updateDimensions);
@@ -26,7 +25,8 @@ const Game = memo(function Game({ width, height }) {
 
   //console.log(windowState)
   return (
-      <RunningContext.Provider value={running}>
+    <>
+        
         <ForestBackground
           width={width}
           height={height}
@@ -34,22 +34,22 @@ const Game = memo(function Game({ width, height }) {
             <GameEngine
               ref={(ref) => { gameEngine.current = ref; } }
               style={{ width: width, height: height }}
-              running={running}
+              running={gameState.isRunning}
               systems={Systems} // collection of functions ran per tick
               entities={Entities({ width: width, height: height })}
             >
             </GameEngine>
         </ForestBackground>
-        { !running && (
+        { !gameState.isRunning && (
           <Menu 
             left={`${width/2 - width/3}px`}
             bottom={`${height/2 + height/3}px`}
             width={width * .666} 
             height={height * .666}
-            updateGameState={setRunningState}
           />
         )}
-    </RunningContext.Provider>
+        </>
+       
   );
 })
 

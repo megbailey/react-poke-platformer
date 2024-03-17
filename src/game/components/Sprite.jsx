@@ -1,41 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useSelector } from "react-redux";
 import Tile from './Tile.jsx';
 
+const framesPerStep = 16;
 const Sprite = (props) => {
-    const { src, tile, states, scale, framesPerStep, startWidth } = props
+    const { src, tile, scale } = props
     const { width, height, x, y } = tile
-    const [ state, setState ] = useState(0);
+    const [ frameCount, setFrameCount ] = useState(0);
+    const spriteState = useSelector((state) => state.sprite.value)
+    const animationRef = useRef(null)
+
     let tick = 0;
    
-
     const animate = () => {
         if (tick === framesPerStep) {
             tick = 0;
-            setState(( state + 1) % states );
+            setFrameCount( prevCount => (prevCount + 1) % (spriteState.frames.states -1 ))
         }
         tick += 1;
 
-        return requestAnimationFrame(animate);
+        animationRef.current = requestAnimationFrame(animate);
     };
 
     useEffect(( ) => {
-        const id = animate()
+        animationRef.current = requestAnimationFrame(animate)
 
-        return function cancelFrame() {
-            cancelAnimationFrame(id)
-        }
-    }, [state])
+        return () => cancelAnimationFrame(animationRef.current)
+    
+    }, [])
 
     return (
         <Tile 
             src={src} 
-            state={state} 
             width={width} 
             height={height} 
             x={x}
             y={y}
             scale={scale} 
-            start={startWidth} 
+            state={frameCount}
+            start={ spriteState.frames.startWidth} 
         />
     )
 }

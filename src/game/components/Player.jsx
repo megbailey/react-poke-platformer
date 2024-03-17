@@ -2,32 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Sprite from './Sprite.jsx';
 
-const frontFrames = {
-    startWidth: 1,
-    states: 3
-}
-const backFrames = {
-    startWidth: 49,
-    states: 3
-}
-const leftFrames = {
-    startWidth: 98,
-    states: 2
-}
-const rightFrames = {
-    startWidth: 130,
-    states: 2
-}
-
-const playerState = {
-    FORWARD: frontFrames,
-    BACK: backFrames,
-    LEFT: leftFrames,
-    RIGHT: rightFrames
-}
-
 const Player = ( props ) => {
-    const { src, state, body } = props
+    const { src, body } = props
 
     /* const width = body.bounds.max.x - body.bounds.min.x;
     const height = body.bounds.max.y - body.bounds.min.y; */
@@ -36,7 +12,6 @@ const Player = ( props ) => {
 
     return (
         <Sprite
-            {...playerState[state]}
             src={src}
             tile={{
                 width: 16,
@@ -45,17 +20,14 @@ const Player = ( props ) => {
                 y: y,
             }}
             scale={1.5}
-            framesPerStep={16}
         />
     )
 }
 
 Player.propTypes = {
-    state: PropTypes.oneOf(['FORWARD', 'BACK', 'LEFT', 'RIGHT'])
 }
 
 Player.defaultProps = {
-    state: 'FORWARD'
 }
 
 export default Player

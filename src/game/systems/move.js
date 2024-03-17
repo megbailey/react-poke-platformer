@@ -1,21 +1,31 @@
 import Matter from 'matter-js';
+import store from '../store.js'
+import { direction } from '../reducers';
 
 const Move = (entities, { KeyboardController }) => {
   const player = entities['player']
 
   // walking
   if ( KeyboardController.w) {
-    player.state = 'BACK'
+    store.dispatch(
+      direction('BACK'),
+    );
   } else if ( KeyboardController.a ) {
-    player.state = 'LEFT'
+    store.dispatch(
+      direction('LEFT'),
+    );
     Matter.Body.translate( player.body, { 
       x: -2,
       y: 0
     })
   } else if ( KeyboardController.s  ) {
-    player.state = 'FORWARD'
+    store.dispatch(
+      direction('FRONT'),
+    );
   } else if ( KeyboardController.d ) {
-    player.state = 'RIGHT'
+    store.dispatch(
+      direction('RIGHT'),
+    );
     Matter.Body.translate( player.body, { 
       x: 2,
       y: 0

@@ -2,15 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Game from "./game/index.js";
+import { Provider } from "react-redux";
+import store from './game/store.js';
 /* import * as ServiceWorker from './service-worker.js'
 import reportWebVitals from './reportWebVitals.js'; */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Game 
-        width={1200}
-        height={400}
-    />
+    <Provider store={store}>
+        <Game 
+            width={1200}
+            height={400}
+        />
+    </Provider>
 );
 
 // If you want your app to work offline and load faster, you can change

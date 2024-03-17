@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { RunningContext } from '../index.js';
+import { useSelector } from "react-redux";
+import store from '../store.js'
+import { running } from '../reducers';
 
 
 const Menu = ( props ) => {
-    const { src, width, height, left, bottom, updateGameState } = props
-    const  runningState = useContext(RunningContext);
+    const { src, width, height, left, bottom } = props
+    const gameState = useSelector((state) => state.game.value)
 
     //console.log(width * .5, height * .66)
     return (
@@ -38,7 +40,7 @@ const Menu = ( props ) => {
                 bottom: `-${height * .667 - 50}px`,
                 position: 'relative',
             }}
-            onClick={() => updateGameState(!runningState)}
+            onClick={() => store.dispatch( running(!gameState.isRunning) )}
         >Start Game</button>
       </div>
     )
