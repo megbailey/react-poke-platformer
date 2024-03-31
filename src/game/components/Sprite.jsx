@@ -9,17 +9,25 @@ const Sprite = (props) => {
     const [ frameCount, setFrameCount ] = useState(0);
     const spriteState = useSelector((state) => state.sprite.value)
     const animationRef = useRef(null)
+    const frameCountRef = useRef(0)
+    let tickRef = useRef(0)
 
-    let tick = 0;
-   
     const animate = () => {
-        if (tick === framesPerStep) {
-            tick = 0;
-            setFrameCount( prevCount => (prevCount + 1) % (spriteState.frames.states -1 ))
+        if (tickRef.current === framesPerStep) {
+            tickRef.current = 0;
+            frameCountRef.current = (frameCountRef.current + 1) % spriteState.frames.states   
         }
-        tick += 1;
-
-        animationRef.current = requestAnimationFrame(animate);
+        tickRef.current += 1;
+        // console.log( `${tickRef.current} -- current: ${frameCountRef.current} -- total states: ${spriteState.frames.states} -- next: ${(frameCountRef.current + 1) % spriteState.frames.states}`)
+        // When spriteState changes quickly, sometimes the current frame count will be the same ( or greater ) than the number states that represent the current direction. 
+        // When this condition occurs, just go to the next state. 
+        if ( frameCountRef.current >= spriteState.frames.states ){
+            frameCountRef.current = (frameCountRef.current + 1) % spriteState.frames.states  
+        } else {
+            animationRef.current = requestAnimationFrame(animate);
+        }
+       
+       
     };
 
     useEffect(( ) => {
@@ -27,7 +35,7 @@ const Sprite = (props) => {
 
         return () => cancelAnimationFrame(animationRef.current)
     
-    }, [])
+    }, [spriteState])
 
     return (
         <Tile 
@@ -37,7 +45,7 @@ const Sprite = (props) => {
             x={x}
             y={y}
             scale={scale} 
-            state={frameCount}
+            state={ frameCountRef.current}
             start={ spriteState.frames.startWidth} 
         />
     )
