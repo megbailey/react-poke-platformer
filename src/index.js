@@ -8,11 +8,14 @@ import store from './game/store.js';
 import reportWebVitals from './reportWebVitals.js'; */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const width  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+const height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
+
 root.render(
     <Provider store={store}>
         <Game 
-            width={1200}
-            height={400}
+            width={ width * .9 }
+            height={ height * .3334 }
         />
     </Provider>
 );

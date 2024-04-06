@@ -14,15 +14,17 @@ const Game = memo(function Game({ width, height }) {
   const gameEngine = useRef(null);
   const gameState = useSelector((state) => state.game.value)
   
-/*   useEffect(() => {
-    window.addEventListener('resize', updateDimensions);
-  },[])
+  useEffect(() => {
+    console.log(width, height)
+  },[width, height])
+  /*
   function updateDimensions() {
     const newState = { width: width, height: (height) }
     setWindowState(newState)
     gameEngine.current.swap(Entities({ ...newState}))
   } */
 
+  console.log(width, height)
   //console.log(windowState)
   return (
     <>
