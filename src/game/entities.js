@@ -8,10 +8,10 @@ import Platform from "./components/Platform.jsx";
 
 //import mdPlatform from '../assets/img/tileset_desert_md.png';
 //import lgPlatform from '../assets/img/tileset_desert_lg.png';
-import floorTile from '../assets/img/nature-paltformer-floor-tile.png';
-import mdPlatform from '../assets/img/nature-paltformer-tile-md.png';
-import lgPlatform from '../assets/img/nature-paltformer-tile-lg.png';
-import sprite1 from '../assets/img/trainer-sprite-1.png';
+import floorTile from './assets/img/nature-paltformer-floor-tile.png';
+import mdPlatform from './assets/img/nature-paltformer-tile-md.png';
+import lgPlatform from './assets/img/nature-paltformer-tile-lg.png';
+import sprite1 from './assets/img/trainer-sprite-1.png';
 
 let Engine = Matter.Engine;
 let Bodies = Matter.Bodies;

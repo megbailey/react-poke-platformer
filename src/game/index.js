@@ -5,15 +5,15 @@ import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 import Background from './components/Background.jsx'
 
-import Trees from '../assets/img/trees.png'
-import DesertA from '../assets/img/desert_a.png'
-import MountainA from '../assets/img/mountains_a.png'
+import Trees from './assets/img/trees.png'
+import DesertA from './assets/img/desert_a.png'
+import MountainA from './assets/img/mountains_a.png'
 import Menu from "./components/Menu.jsx";
 
 const Game = memo(function Game({ width, height }) {
   const gameEngine = useRef(null);
   const gameState = useSelector((state) => state.game.value)
-  
+ 
   useEffect(() => {
     console.log(width, height)
   },[width, height])
