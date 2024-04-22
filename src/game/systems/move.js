@@ -1,6 +1,6 @@
 import Matter from 'matter-js';
 import store from '../store.js'
-import { direction } from '../reducers';
+import { direction } from '../reducers.js';
 
 const Move = (entities, { KeyboardController }) => {
   const player = entities['player']

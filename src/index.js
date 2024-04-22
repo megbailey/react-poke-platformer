@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Game from "./game/index.js";
-import { Provider } from "react-redux";
-import store from './game/store.js';
+import PokeGame from "./game/index.js";
 /* import * as ServiceWorker from './service-worker.js'
 import reportWebVitals from './reportWebVitals.js'; */
 
@@ -12,12 +10,10 @@ const width  = window.innerWidth || document.documentElement.clientWidth || docu
 const height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
 
 root.render(
-    <Provider store={store}>
-        <Game 
-            width={ width * .9 }
-            height={ height * .3334 }
-        />
-    </Provider>
+    <PokeGame 
+        width={ width * .9 }
+        height={ height * .3334 }
+    />
 );
 
 // If you want your app to work offline and load faster, you can change

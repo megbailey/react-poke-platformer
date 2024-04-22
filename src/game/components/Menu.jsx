@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from "react-redux";
 import store from '../store.js'
-import { running } from '../reducers';
+import { running } from '../reducers.js';
 
 
 const Menu = ( props ) => {

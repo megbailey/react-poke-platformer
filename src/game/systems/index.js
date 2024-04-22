@@ -1,7 +1,7 @@
 
-import KeyboardController from "./keyboard-controller";
-import Gravity from "./gravity";
-import Move from "./move";
+import KeyboardController from "./keyboard-controller.js";
+import Gravity from "./gravity.js";
+import Move from "./move.js";
 
 const Systems =  [
 	KeyboardController(),

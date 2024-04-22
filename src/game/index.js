@@ -1,6 +1,6 @@
-import React, { memo, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { GameEngine } from "react-game-engine";
-import { useSelector } from "react-redux";
+import {Provider, useSelector } from "react-redux";
 import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 import Background from './components/Background.jsx'
@@ -9,8 +9,11 @@ import Trees from './assets/img/trees.png'
 import DesertA from './assets/img/desert_a.png'
 import MountainA from './assets/img/mountains_a.png'
 import Menu from "./components/Menu.jsx";
+import store from './store.js';
 
-const Game = memo(function Game({ width, height }) {
+//console.log(ReactGameEngine);
+
+const Game = ({ width, height }) => {
   const gameEngine = useRef(null);
   const gameState = useSelector((state) => state.game.value)
  
@@ -24,7 +27,7 @@ const Game = memo(function Game({ width, height }) {
     gameEngine.current.swap(Entities({ ...newState}))
   } */
 
-  console.log(width, height)
+  console.log("in game", width, height)
   //console.log(windowState)
   return (
     <>
@@ -53,9 +56,8 @@ const Game = memo(function Game({ width, height }) {
         </>
        
   );
-})
+}
 
-export default Game;
 
 /*  const DesertBackground = ({width, height, children}) => {
   return (
@@ -101,3 +103,11 @@ const ForestBackground = ({width, height, children}) => {
     </Background>
   )
 } */
+
+const PokePlatformer = (props) => (
+  <Provider store={store}>
+    <Game {...props}/>
+  </Provider>
+);
+
+export default PokePlatformer;
