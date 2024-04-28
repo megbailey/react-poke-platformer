@@ -13,9 +13,10 @@ const World = ( props ) => {
     console.log(width, height)
 
     useEffect(() => {
-      if ( debug === true ){
+      const debugCanvas = document.getElementById('debug-matter-canvas')
+      if ( debug === true && debugCanvas) {
         var render = Matter.Render.create({
-          element: document.body,
+          canvas: debugCanvas,
           engine: engine,
           options: { 
             width: width, 

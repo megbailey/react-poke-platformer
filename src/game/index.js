@@ -43,11 +43,13 @@ const Game = ({ width, height, referenceHeight, debug }) => {
             referenceHeight: referenceHeight, 
             debug: debug
           })}
-        >
+        > 
+          { debug === true && (
+            <canvas id="debug-matter-canvas" />
+          )}
         </GameEngine>
-          </ForestBackground>
-        </>
-       
+      </ForestBackground>
+    </>
   );
 }
 
