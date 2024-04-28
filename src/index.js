@@ -13,6 +13,8 @@ root.render(
     <PokeGame 
         width={ width * .9 }
         height={ height * .3334 }
+        debug={true}
+        //referenceHeight={ 100 }
     />
 );
 

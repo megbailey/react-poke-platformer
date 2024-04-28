@@ -13,13 +13,10 @@ import store from './store.js';
 
 //console.log(ReactGameEngine);
 
-const Game = ({ width, height }) => {
+const Game = ({ width, height, referenceHeight, debug }) => {
   const gameEngine = useRef(null);
   const gameState = useSelector((state) => state.game.value)
  
-  useEffect(() => {
-    console.log(width, height)
-  },[width, height])
   /*
   function updateDimensions() {
     const newState = { width: width, height: (height) }
@@ -27,32 +24,28 @@ const Game = ({ width, height }) => {
     gameEngine.current.swap(Entities({ ...newState}))
   } */
 
-  console.log("in game", width, height)
   //console.log(windowState)
   return (
     <>
-        
-        <ForestBackground
-          width={width}
-          height={height}
+      <ForestBackground
+        width={width}
+        height={height}
+        debug={debug}
+      >
+        <GameEngine
+          //ref={(ref) => { gameEngine.current = ref; } }
+          style={debug === false ? { width: width, height: height } : null}
+          running={true}
+          systems={Systems} // collection of functions ran per tick
+          entities={ Entities({
+            width: width, 
+            height: height, 
+            referenceHeight: referenceHeight, 
+            debug: debug
+          })}
         >
-            <GameEngine
-              ref={(ref) => { gameEngine.current = ref; } }
-              style={{ width: width, height: height }}
-              running={gameState.isRunning}
-              systems={Systems} // collection of functions ran per tick
-              entities={Entities({ width: width, height: height })}
-            >
-            </GameEngine>
-        </ForestBackground>
-        { !gameState.isRunning && (
-          <Menu 
-            left={`${width/2 - width/3}px`}
-            bottom={`${height/2 + height/3}px`}
-            width={width * .666} 
-            height={height * .666}
-          />
-        )}
+        </GameEngine>
+          </ForestBackground>
         </>
        
   );
@@ -72,20 +65,24 @@ const Game = ({ width, height }) => {
   )
 } */
 
-const ForestBackground = ({width, height, children}) => {
-  return (
-    <Background
-        color="#8abdf0"
-        width={width}
-        height={height}
-        src={Trees}
-        style={{
-          backgroundPosition: 'center bottom'
-        }}
-    >
-      {children}
-    </Background>
-  )
+const ForestBackground = ({width, height, debug = false, children}) => {
+  if ( debug === false) {  
+    return (
+      <Background
+          color="#8abdf0"
+          width={width}
+          height={height}
+          src={Trees}
+          style={{
+            backgroundPosition: 'center bottom'
+          }}
+      >
+        {children}
+      </Background>
+    )
+  } else {
+    return children
+  }
 }
 
 /* const MountainsBackground = ({ width, height, children }) => {

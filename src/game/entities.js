@@ -76,8 +76,8 @@ export default async ( state ) => {
 
 
 	let engine = Engine.create({});
-
-	let world = World({
+	World({
+		...state,
 		engine: engine,
 		entities: [ 
 			floor,
@@ -98,25 +98,24 @@ export default async ( state ) => {
 	const entities = {
 		physics: { 
 			engine: engine, 
-			world: world 
 		},
 		floor: { 
 			body: floor, 
 			color: '#FF7300',
 			src: floorTile,
-			renderer: <Floor /> 
+			renderer: state.debug !== true ? <Floor /> : null
 		},
 		md_platform_1:{ 
 			body: md_platform_1_body, 
 			...platforms.md,
 			//border: true,
-			renderer: <Platform />
+			renderer: state.debug !== true ? <Platform /> : null
 		},
 		md_platform_2:{ 
 			body: md_platform_2_body,
 			...platforms.md,
 			//border: true,
-			renderer: <Platform />
+			renderer: state.debug !== true ? <Platform /> : null
 		},
 		/* lg_platform_1:{ 
 			body: lg_platform_1_body, 
@@ -127,7 +126,7 @@ export default async ( state ) => {
 		player: { 
 			body: player, 
 			src: sprite1, 
-			renderer: <Player /> 
+			renderer: state.debug !== true ? <Player /> : null
 		},
 		wallLeft: { body: wallLeft },
 		wallRight: { body: wallRight },

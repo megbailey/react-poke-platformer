@@ -90,7 +90,8 @@ module.exports = (env, argv) => {
         config.externals = {
             'react': 'react',
             'react-dom': 'react-dom',
-            'react-redux': 'react-redux'
+            'react-redux': 'react-redux',
+            '@reduxjs/toolkit': '@reduxjs/toolkit'
         }
 
     } else if (isDevelopment) {
