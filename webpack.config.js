@@ -22,12 +22,8 @@ module.exports = (env, argv) => {
         output: {
             path: path.resolve(__dirname, `dist`),
             filename: `${filename}`,
-           /*  library: {
-                name: `${library}`,
-                type: 'umd'
-            },  */
-            libraryTarget: 'commonjs2'
         },
+        devtool: 'inline-source-map',
         devServer: {
             port: port,
             hot: true
@@ -94,12 +90,19 @@ module.exports = (env, argv) => {
             '@reduxjs/toolkit': '@reduxjs/toolkit'
         }
 
+        config.output.libraryTarget = 'commonjs2';
+
     } else if (isDevelopment) {
         config.mode = 'development';
     } 
 
-    // If running as a server, we need to actually call our component library to render it. 
-    // So entry point will be level higher so that app will render at <div id='root'></div>
-    if ( isWebpackServer ) config.entry = './src/index.js';
+    if ( isWebpackServer ) { 
+        // If running as a dev server, we want to call our component library to render it. 
+        // So entry point will be level higher so that app will render at <div id='root'></div>
+        config.entry = './src/index.js';
+        config.output.library = {
+            type: 'umd'
+        }
+    }
     return config;
 };
