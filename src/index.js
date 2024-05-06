@@ -10,12 +10,18 @@ const width  = window.innerWidth || document.documentElement.clientWidth || docu
 const height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
 
 root.render(
-    <PokeGame 
-        width={ width * .9 }
-        height={ height * .3334 }
-        debug={true}
-        //referenceHeight={ 100 }
-    />
+    <div
+        style={{
+            //padding: '5%',
+            background: 'black',
+        }}
+    > 
+        <PokeGame 
+            width={ width * .9 }
+            height={ height * .3334 }
+            //debug={true}
+        />
+    </div>
 );
 
 // If you want your app to work offline and load faster, you can change

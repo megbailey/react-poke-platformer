@@ -7,15 +7,10 @@ const Platform = ( props ) => {
 
     let x, y;
     if (body.type === "body") {
-        x = body.position.x - (width /2);
-        y = body.position.y;
+        x = body.position.x - width /2;
+        y = body.position.y - height/2;
     }
 
-    //height = auto; width = auto;
-    //let angle = body.angle;
-    //let degrees = angle * (180 / Math.PI);
-
-    //console.log(body, width, height)
     return (
         <div 
             className='c-platform'
@@ -23,7 +18,8 @@ const Platform = ( props ) => {
                 ...style,
                 height: `${height}px`,
                 width: `${width}px`,
-                transform: `translate(${x}px, ${y }px)`,
+                top: `${y}px`,
+                left: `${x}px`,
                 borderStyle: border ? 'solid' : 'none',
                 position: 'absolute',
             }}
