@@ -12,7 +12,7 @@ const height = window.innerHeight|| document.documentElement.clientHeight|| docu
 root.render(
     <div
         style={{
-            //padding: '5%',
+            padding: '5%',
             background: 'black',
         }}
     > 

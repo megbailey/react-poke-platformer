@@ -46,7 +46,7 @@ export default async (renderState) => {
 	console.log(`floor render w${gameWidth/2} h${gameHeight-platforms.lg.height/2}`)
 	const floor = Bodies.rectangle( 
 		gameWidth/2, 
-		gameHeight-platforms.lg.height/2,
+		gameHeight-38,
 		gameWidth,
 		platforms.lg.height, 
 		{ isStatic: true }
@@ -83,27 +83,27 @@ export default async (renderState) => {
 		
 	const md_platform_1_body = Bodies.rectangle(
 		gameWidth * 0.2, 
-		gameHeight * .4 + platforms.lg.height, 
+		gameHeight * 0.6,
 		platforms.md.width, platforms.md.height, 
 		{ isStatic: true }
 	);
 	const md_platform_2_body = Bodies.rectangle(
 		gameWidth * 0.3, 
-		gameHeight * 0.2 + platforms.lg.height, 
+		gameHeight * 0.5,
 		platforms.md.width, platforms.md.height, 
 		{ isStatic: true }
 	);
 
 	const md_platform_3_body = Bodies.rectangle(
-		gameWidth * 0.7, 
-		gameHeight * 0.2 + platforms.lg.height, 
+		gameWidth * 0.6, 
+		gameHeight * 0.5, 
 		platforms.md.width, platforms.md.height, 
 		{ isStatic: true }
 	);
 
 	const md_platform_4_body = Bodies.rectangle(
-		gameWidth * 0.8, 
-		gameHeight * 0.4 + platforms.lg.height, 
+		gameWidth * 0.7, 
+		gameHeight * 0.6, 
 		platforms.md.width, platforms.md.height, 
 		{ isStatic: true }
 	);
