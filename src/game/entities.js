@@ -28,8 +28,7 @@ export default async (renderState) => {
 		debug = false
 	  } = renderState
 
-	console.log(renderState)
-
+	  //console.log(renderState)
 	const platforms = {
 		md: {
 			src: mdPlatform,
@@ -43,7 +42,7 @@ export default async (renderState) => {
 		}
 	}
 
-	console.log(`floor render w${gameWidth/2} h${gameHeight-platforms.lg.height/2}`)
+	//console.log(`floor render w${gameWidth/2} h${gameHeight-platforms.lg.height/2}`)
 	const floor = Bodies.rectangle( 
 		gameWidth/2, 
 		gameHeight-38,

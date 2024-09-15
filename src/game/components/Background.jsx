@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
+
 
 import Trees from '../assets/img/trees.png'
+
 //import DesertA from '../assets/img/desert_a.png'
 //import MountainA from '../assets/img/mountains_a.png'
 
@@ -14,20 +17,33 @@ const Background = ({
   children 
 }) => {
 
+  const gameState = useSelector((state) => state.game.value)
+  let transformPosition = gameState.scrollPosition
+
   return (
-    <div 
-      className='c-background'
+    <div
+      className='c-scrolling-background'
       style={{
-        ...style,
-        width: `${width}px`,
-        height: `${height}px`,
-        backgroundColor: `${color}`,
+        width: '100%',
+        height: '100%',
         overflow: 'hidden',
-        backgroundImage: `url(${src})`,
-        backgroundRepeat: 'repeat-x',
       }}
-    >
-        {children}
+      >
+      <div 
+        className='c-background'
+        style={{
+          ...style,
+          transform: `translateX(${transformPosition}px)`,
+          width: `${width * 10}px`, // very large width for infinite scroll
+          height: `${height}px`,
+          backgroundSize: 'auto',
+          backgroundColor: `${color}`,
+          backgroundImage: `url(${src})`,
+          backgroundRepeat: 'repeat-x',
+        }}
+      >
+          {children}
+      </div>
     </div>
   )
     
