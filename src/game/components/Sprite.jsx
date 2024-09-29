@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from "react-redux";
 import Tile from './Tile.jsx';
 
@@ -6,7 +6,6 @@ const framesPerStep = 16;
 const Sprite = (props) => {
     const { src, tile, scale } = props
     const { width, height, x, y } = tile
-    const [ frameCount, setFrameCount ] = useState(0);
     const spriteState = useSelector((state) => state.sprite.value)
     const animationRef = useRef(null)
     const frameCountRef = useRef(0)

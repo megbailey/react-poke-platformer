@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Sprite from './Sprite.jsx';
 
 const Player = ( props ) => {
@@ -22,12 +21,6 @@ const Player = ( props ) => {
             scale={1.5}
         />
     )
-}
-
-Player.propTypes = {
-}
-
-Player.defaultProps = {
 }
 
 export default Player

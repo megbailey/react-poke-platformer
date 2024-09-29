@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 
 const Platform = ( props ) => {
     const { src, body, width, height, style } = props

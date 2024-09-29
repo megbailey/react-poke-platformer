@@ -13,13 +13,25 @@ import floorTile from './assets/img/nature-paltformer-floor-tile.png';
 import mdPlatform from './assets/img/nature-paltformer-tile-md.png';
 import lgPlatform from './assets/img/nature-paltformer-tile-lg.png';
 import sprite1 from './assets/img/trainer-sprite-1.png';
+import { getRandomInteger } from './utils.js';
 
 let Engine = Matter.Engine;
 let Bodies = Matter.Bodies;
-let Composite = Matter.Composite;
 //let Common = Matter.Common;
 //let Vertices = Matter.Vertices;
 
+const platforms = {
+	md: {
+		src: mdPlatform,
+		width: 48,
+		height: 16
+	},
+	lg: {
+		src: lgPlatform,
+		width: 48,
+		height: 48,
+	}
+}
 
 export default async (renderState) => {
 	const {
@@ -27,20 +39,6 @@ export default async (renderState) => {
 		gameHeight,
 		debug = false
 	  } = renderState
-
-	  //console.log(renderState)
-	const platforms = {
-		md: {
-			src: mdPlatform,
-			width: 48,
-			height: 16
-		},
-		lg: {
-			src: lgPlatform,
-			width: 48,
-			height: 48,
-		}
-	}
 
 	//console.log(`floor render w${gameWidth/2} h${gameHeight-platforms.lg.height/2}`)
 	const floor = Bodies.rectangle( 
@@ -78,42 +76,28 @@ export default async (renderState) => {
 		16,
 		{ restitution: 0.3, /* bounce */ }
 	); 
-
-		
-	const md_platform_1_body = Bodies.rectangle(
-		gameWidth * 0.2, 
-		gameHeight * 0.6,
-		platforms.md.width, platforms.md.height, 
-		{ isStatic: true }
-	);
-	const md_platform_2_body = Bodies.rectangle(
-		gameWidth * 0.3, 
-		gameHeight * 0.5,
-		platforms.md.width, platforms.md.height, 
-		{ isStatic: true }
-	);
-
-	const md_platform_3_body = Bodies.rectangle(
-		gameWidth * 0.6, 
-		gameHeight * 0.5, 
-		platforms.md.width, platforms.md.height, 
-		{ isStatic: true }
-	);
-
-	const md_platform_4_body = Bodies.rectangle(
-		gameWidth * 0.7, 
-		gameHeight * 0.6, 
-		platforms.md.width, platforms.md.height, 
-		{ isStatic: true }
-	);
-
-	/* const lg_platform_1_body = Bodies.rectangle(
-		gameWidth * 0.6 - platforms.lg.width/2, 
-		gameHeight * 0.55 + floorHeight - platforms.lg.height/2, 
-		platforms.lg.width, platforms.lg.height, {
-		isStatic: true,
-	}); */
-
+	
+	let generatedBodies = [
+		// Width boundary is wall width (25) with some padding
+		// Height boundary is celing (10) and floor (48) each with a little padding
+		...generatePlatforms(40, 1000, 30, gameHeight-60),
+		...generatePlatforms(1001, 2000, 30, gameHeight-60),
+		...generatePlatforms(2001, 3000, 30, gameHeight-60),
+		...generatePlatforms(3001, 4000, 30, gameHeight-60),
+		...generatePlatforms(4001, 5000, 30, gameHeight-60),
+		...generatePlatforms(5001, 6000, 30, gameHeight-60),
+		...generatePlatforms(6001, 7000, 30, gameHeight-60),
+		...generatePlatforms(7001, 7900, 30, gameHeight-60),
+	]
+	
+	let generatedPlatforms = { }
+	generatedBodies.forEach(( body, index )=> {
+		generatedPlatforms[`platform-${index}`] = {
+			...platforms.md,
+			renderer: debug !== true ? <Platform /> : null,
+			body: body
+		}
+	})
 
 	let engine = Engine.create({});
 	World({
@@ -125,10 +109,7 @@ export default async (renderState) => {
 			wallLeft,
 			ceiling,
 			player,
-			md_platform_1_body,
-			md_platform_2_body,
-			md_platform_3_body,
-			md_platform_4_body
+			...generatedBodies
 		]
 	})
 
@@ -148,36 +129,6 @@ export default async (renderState) => {
 			border: true,
 			renderer: debug !== true ? <Floor /> : null
 		},
-		md_platform_1:{ 
-			body: md_platform_1_body,
-			...platforms.md,
-			//border: true,
-			renderer: debug !== true ? <Platform /> : null
-		},
-		md_platform_2:{ 
-			body: md_platform_2_body,
-			...platforms.md,
-			//border: true,
-			renderer: debug !== true ? <Platform /> : null
-		},
-		md_platform_3:{ 
-			body: md_platform_3_body,
-			...platforms.md,
-			//border: true,
-			renderer: debug !== true ? <Platform /> : null
-		},
-		md_platform_4:{ 
-			body: md_platform_4_body,
-			...platforms.md,
-			//border: true,
-			renderer: debug !== true ? <Platform /> : null
-		},
-		/* lg_platform_1:{ 
-			body: lg_platform_1_body, 
-			...platforms.lg,
-			//border: true,
-			renderer: <Platform />
-		}, */
 		player: { 
 			body: player, 
 			src: sprite1, 
@@ -186,8 +137,28 @@ export default async (renderState) => {
 		wallLeft: { body: wallLeft },
 		wallRight: { body: wallRight },
 		ceiling: { body: ceiling },
+		...generatedPlatforms
 		
 	}
 
 	return entities;
 };
+
+const generatePlatforms = (startXPosition, endXPosition, startYPosition, endYPosition) => {
+	let generatedBodies = [ ]
+	let numOfEntities = getRandomInteger(5,10)
+	for ( let i = 0; i < numOfEntities; i ++ ) {
+		// only left boundary is needed and its wall width (25) with some padding
+		const entityXPosition = getRandomInteger(startXPosition, endXPosition)
+		// boundary is celing (10) and floor (48) each with a little padding
+		const entityYPosition = getRandomInteger(startYPosition, endYPosition)
+		generatedBodies.push( Bodies.rectangle(
+			entityXPosition, 
+			entityYPosition,
+			platforms.md.width, platforms.md.height, 
+			{ isStatic: true }
+		))
+	}
+
+	return generatedBodies;
+}
