@@ -30,6 +30,7 @@ const Game = ({
   const gameStyle = {
     width: width, 
     height: height, 
+    overflow: 'hidden',
     // must set position to relative so that other css positioning is relative to this container
     position: 'relative'
   }

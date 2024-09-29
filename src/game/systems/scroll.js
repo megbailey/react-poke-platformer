@@ -3,20 +3,30 @@ import store from '../store.js'
 import { scroll } from '../reducers.js';
 
 const Scroll = (entities) => {
-    const player = entities['player']
-    const wallRight = entities['wallRight']
+    const {
+        player,
+        wallRight,
+        wallLeft,
+        ceiling,
+        floor,
+        world,
+        ...scrollableEntities
+    } = entities
     const rightCollison = Matter.Collision.collides(player.body, wallRight.body)
     
-    //const wallLeft = entities['wallLeft']
-    //const leftCollison = Matter.Collision.collides(player.body, wallLeft.body)
-
     if ( rightCollison !== null && rightCollison.collided ) {
         store.dispatch(scroll('right'))
-    } /* else if ( leftCollison !== null && leftCollison.collided ) {
-        store.dispatch(scrollLeft())
-    } */
 
-  
+        // Translate scrollable entities anytime scroll occurs
+        Object.keys( scrollableEntities ).forEach(( entityKey )=> {
+            Matter.Body.translate( scrollableEntities[entityKey].body, { 
+                x: -1,
+                y: 0
+            })
+        })
+       
+    } 
+   
   return entities;
 };
 
