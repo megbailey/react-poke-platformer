@@ -13,8 +13,8 @@ const World = ({
   if ( entities.length > 0 ){
     Matter.World.add( engine.world, entities );
   } 
-
   useEffect(() => {
+    // render canvas only when debugging
     const debugCanvas = document.getElementById('debug-matter-canvas')
     if ( debug === true && debugCanvas) {
       var render = Matter.Render.create({

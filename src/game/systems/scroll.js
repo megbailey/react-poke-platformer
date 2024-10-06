@@ -20,7 +20,7 @@ const Scroll = (entities) => {
         // Translate scrollable entities anytime scroll occurs
         Object.keys( scrollableEntities ).forEach(( entityKey )=> {
             Matter.Body.translate( scrollableEntities[entityKey].body, { 
-                x: -1,
+                x: -2,
                 y: 0
             })
         })

@@ -6,9 +6,22 @@ export const gameSlice = createSlice({
         value : {
             isRunning: false,
             scrollPosition: 0,
+            consumedBodies: [],
+            bag: {
+                pokeballs: 0,
+            }
         }
     },
     reducers: {
+        consume: (state, action) => {
+            state.value = {
+                ...state.value,
+                "consumedBodies": [
+                    ...state.value.consumedBodies,
+                    action.payload
+                ]
+            }
+        },
         running: (state, action) => {
             state.value = {
                 ...state.value,
@@ -19,12 +32,12 @@ export const gameSlice = createSlice({
             if ( action.payload === 'right' )
                 state.value = {
                     ...state.value,
-                    scrollPosition: state.value.scrollPosition - 1
+                    scrollPosition: state.value.scrollPosition - .5
                 }
             else if ( action.payload === 'left' )
                 state.value = {
                     ...state.value,
-                    scrollPosition: state.value.scrollPosition + 1
+                    scrollPosition: state.value.scrollPosition + .5
                 }
         },
     }
@@ -73,6 +86,6 @@ export const spriteSlice = createSlice({
 })
 
 export const { direction } = spriteSlice.actions;
-export const { running, scroll } = gameSlice.actions;
+export const { consume, running, scroll } = gameSlice.actions;
 
 

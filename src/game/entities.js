@@ -1,24 +1,26 @@
 import React from 'react';
 import Matter from 'matter-js';
+
 import World from "./world.js";
+import store from './store.js'
+import { consume } from './reducers.js';
 
 import Player from "./components/Player.jsx";
 import Platform from "./components/Platform.jsx";
 import { ForestBackground } from './components/Background.jsx';
 import Floor from "./components/Floor.jsx";
+import Item from './components/Item.jsx';
 
-//import mdPlatform from '../assets/img/tileset_desert_md.png';
-//import lgPlatform from '../assets/img/tileset_desert_lg.png';
 import floorTile from './assets/img/nature-paltformer-floor-tile.png';
 import mdPlatform from './assets/img/nature-paltformer-tile-md.png';
 import lgPlatform from './assets/img/nature-paltformer-tile-lg.png';
 import sprite1 from './assets/img/trainer-sprite-1.png';
+import pokeball from './assets/img/pokeball.svg';
+
 import { getRandomInteger } from './utils.js';
 
 let Engine = Matter.Engine;
 let Bodies = Matter.Bodies;
-//let Common = Matter.Common;
-//let Vertices = Matter.Vertices;
 
 const platforms = {
 	md: {
@@ -30,6 +32,13 @@ const platforms = {
 		src: lgPlatform,
 		width: 48,
 		height: 48,
+	}
+}
+const consumabes = {
+	pokeball: {
+		src: pokeball,
+		width: 16,
+		height: 16,
 	}
 }
 
@@ -46,60 +55,131 @@ export default async (renderState) => {
 		gameHeight-38,
 		gameWidth,
 		platforms.lg.height, 
-		{ isStatic: true }
+		{ 
+			isStatic: true,
+			label: 'Floor'
+		}
 	);  
 	const wallRight = Bodies.rectangle(
-		gameWidth - 25, // subtract half of object width to increase volume of object in bounds
+		gameWidth - ( gameWidth/4 ), // set right wall at quarter of game size to start scrolling there
 		gameHeight/2, 
 		50, 
 		gameHeight, 
-		{ isStatic: true }
+		{ 
+			isStatic: true,
+			label: 'Right Wal'
+		}
 	);
 	const wallLeft = Bodies.rectangle(
-		25, // start at least half of object width to to increase volume of object in bounds
+		-25, // set left wall at the very left so the object is in not in view
 		gameHeight/2, 
 		50,  
 		gameHeight, 
-		{ isStatic: true }
+		{ 
+			isStatic: true,
+			label: 'Left Wall'
+		}
 	);
  	const ceiling = Bodies.rectangle(
 		gameWidth/2, 
-		5, // start at half of width so all of the object is in bounds
+		-15, // start - at half of width so the object is in not in view
 		gameWidth, 
-		10, 
-		{ isStatic: true }
+		30, 
+		{ 
+			isStatic: true,
+			label: 'Ceiling'
+		}
 	);
 	const player = Bodies.rectangle(
 		gameWidth/2, // spawn in center
-		gameHeight/4, // spawn near top
+		30, // spawn near top
 		16, 
 		16,
-		{ restitution: 0.3, /* bounce */ }
+		{ 
+			label: 'Player',
+			restitution: 0.3, /* bounce */ 
+			inertia: Infinity /* prevents the body from rotation on collision */
+		}
 	); 
-	
-	let generatedBodies = [
-		// Width boundary is wall width (25) with some padding
-		// Height boundary is celing (10) and floor (48) each with a little padding
-		...generatePlatforms(40, 1000, 30, gameHeight-60),
-		...generatePlatforms(1001, 2000, 30, gameHeight-60),
-		...generatePlatforms(2001, 3000, 30, gameHeight-60),
-		...generatePlatforms(3001, 4000, 30, gameHeight-60),
-		...generatePlatforms(4001, 5000, 30, gameHeight-60),
-		...generatePlatforms(5001, 6000, 30, gameHeight-60),
-		...generatePlatforms(6001, 7000, 30, gameHeight-60),
-		...generatePlatforms(7001, 7900, 30, gameHeight-60),
+
+	// Left boundary is the wall width with some padding
+	// Height boundary is celing height and floor each with a little padding
+	const p0_to_1000 = generateBodies(45, 1000, 40, gameHeight-80)
+	const p1000_to_2000 = generateBodies(1001, 2000, 40, gameHeight-80)
+	const p2000_to_3000 = generateBodies(2001, 3000, 40, gameHeight-80)
+	const p3000_to_4000 = generateBodies(3001, 4000, 40, gameHeight-80)
+	const p4000_to5000  = generateBodies(4001, 5000, 40, gameHeight-80)
+	const p5000_to_6000 = generateBodies(5001, 6000, 40, gameHeight-80)
+	const p6000_to_7000 = generateBodies(6001, 7000, 40, gameHeight-80)
+	const p7000_to_7900  = generateBodies(7001, 7900, 40, gameHeight-80)
+
+	let generatedPlatformBodies = [
+		...Object.values(p0_to_1000.mediumPlatforms),
+		...Object.values(p1000_to_2000.mediumPlatforms),
+		...Object.values(p2000_to_3000.mediumPlatforms),
+		...Object.values(p3000_to_4000.mediumPlatforms),
+		...Object.values(p4000_to5000.mediumPlatforms),
+		...Object.values(p5000_to_6000.mediumPlatforms),
+		...Object.values(p6000_to_7000.mediumPlatforms),
+		...Object.values(p7000_to_7900.mediumPlatforms),
 	]
+
+	let generatedPokeballBodies = [
+		...Object.values(p0_to_1000.pokeballs),
+		...Object.values(p1000_to_2000.pokeballs),
+		...Object.values(p2000_to_3000.pokeballs),
+		...Object.values(p3000_to_4000.pokeballs),
+		...Object.values(p4000_to5000.pokeballs),
+		...Object.values(p5000_to_6000.pokeballs),
+		...Object.values(p6000_to_7000.pokeballs),
+		...Object.values(p7000_to_7900.pokeballs),
+	]
+
 	
 	let generatedPlatforms = { }
-	generatedBodies.forEach(( body, index )=> {
-		generatedPlatforms[`platform-${index}`] = {
+	generatedPlatformBodies.forEach(( body )=> {
+		generatedPlatforms[body.label] = {
+			body: body,
 			...platforms.md,
+			border: true,
 			renderer: debug !== true ? <Platform /> : null,
-			body: body
+		}
+	})
+
+	let generatedPokeballs = { }
+	generatedPokeballBodies.forEach(( body )=> {
+		generatedPokeballs[body.label] = {
+			body: body, 
+			...consumabes.pokeball,
+			border: true,
+			renderer: debug !== true ? <Item /> : null
 		}
 	})
 
 	let engine = Engine.create({});
+
+	// Add event callback anytime a collsion active.
+	// Check if the collision is between player and consumable object. 
+	Matter.Events.on(engine, 'collisionActive', function(event) {
+		event.pairs.forEach(( collidedPair ) => {
+			const bodyA = collidedPair.bodyA
+			const bodyB = collidedPair.bodyB
+
+			let consumable = null;
+			if ( bodyB.label.includes('pokeball') ) {
+				consumable = bodyB;
+			} else if ( bodyA.label.includes('pokeball') ) {
+				consumable = bodyA;
+			} else {
+				return;
+			}
+
+			Matter.Composite.remove(engine.world, consumable);
+			store.dispatch( consume(consumable.label) )
+
+		})
+	})
+
 	World({
 		...renderState,
 		engine: engine,
@@ -109,7 +189,8 @@ export default async (renderState) => {
 			wallLeft,
 			ceiling,
 			player,
-			...generatedBodies
+			...generatedPlatformBodies,
+			...generatedPokeballBodies
 		]
 	})
 
@@ -137,28 +218,47 @@ export default async (renderState) => {
 		wallLeft: { body: wallLeft },
 		wallRight: { body: wallRight },
 		ceiling: { body: ceiling },
-		...generatedPlatforms
-		
+		...generatedPlatforms,
+		...generatedPokeballs
 	}
 
 	return entities;
 };
 
-const generatePlatforms = (startXPosition, endXPosition, startYPosition, endYPosition) => {
-	let generatedBodies = [ ]
+const generateBodies = (startXPosition, endXPosition, startYPosition, endYPosition) => {
+	let generated = { 
+		mediumPlatforms: { },
+		pokeballs: { }
+	}
 	let numOfEntities = getRandomInteger(5,10)
 	for ( let i = 0; i < numOfEntities; i ++ ) {
-		// only left boundary is needed and its wall width (25) with some padding
-		const entityXPosition = getRandomInteger(startXPosition, endXPosition)
-		// boundary is celing (10) and floor (48) each with a little padding
 		const entityYPosition = getRandomInteger(startYPosition, endYPosition)
-		generatedBodies.push( Bodies.rectangle(
-			entityXPosition, 
-			entityYPosition,
-			platforms.md.width, platforms.md.height, 
-			{ isStatic: true }
-		))
+		const entityXPosition = getRandomInteger(startXPosition, endXPosition)
+		
+		generated['mediumPlatforms'][`medium-platform-${startXPosition}-${i}`] =
+			Bodies.rectangle(
+				entityXPosition, 
+				entityYPosition,
+				platforms.md.width, platforms.md.height, 
+				{ 
+					isStatic: true,
+					label: `medium-platform-${startXPosition}-${i}`
+				}
+			);
+		
+		const itemEntityYPosition = entityYPosition - 16
+		generated['pokeballs'][`pokeball-${startXPosition}-${i}`] = 
+			Bodies.rectangle(
+				entityXPosition + 8, 
+				itemEntityYPosition,
+				consumabes.pokeball.width, consumabes.pokeball.height, 
+				{ 
+					isStatic: true,
+					label: `pokeball-${startXPosition}-${i}`
+				}
+			);
+
 	}
 
-	return generatedBodies;
+	return generated;
 }
