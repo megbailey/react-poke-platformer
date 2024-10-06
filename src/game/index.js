@@ -1,10 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { GameEngine } from "react-game-engine";
-import {Provider, useSelector } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 
+
 import store from './store.js';
+
+import pokeball from './assets/img/pokeball.svg';
+import Health from "./components/Health.jsx";
+
 
 const Game = ({
   width, 
@@ -16,16 +21,12 @@ const Game = ({
   const gameEngine = useRef(null);
   const gameState = useSelector((state) => state.game.value)
  
-
-  useEffect(() => {
-
-  }, []);
-
-  function updateWindowDimensions() {
-   // const newState = { windowWidth: width, windowHeight: (height) }
-    //setWindowState(newState)
-    //gameEngine.current.swap(Entities({ ...newState}))
+  /* function updateWindowDimensions() {
+    const newState = { windowWidth: width, windowHeight: (height) }
+    setWindowState(newState)
+    gameEngine.current.swap(Entities({ ...newState}))
   }
+  */
   
   const gameStyle = {
     width: width, 
@@ -36,7 +37,31 @@ const Game = ({
   }
 
   return (
-    <>
+    <div id="game-container">
+      <div 
+        id='game-top'
+        style={{ 
+          height: height/10,
+          display: 'flex'
+        }}
+      >
+       <Health />
+        <div 
+          id='pokeballs' 
+          style={{ display: 'flex' }}
+        >
+          <img 
+              style={{ 
+                height: `${16}px`,
+                width: `${16}px`,
+              }}
+              src={pokeball}
+          />
+          <div key={gameState.bag.pokeballs}>
+            {gameState.bag.pokeballs}
+          </div>
+        </div>
+      </div>
       <GameEngine
         //ref={(ref) => { gameEngine.current = ref; } }
         style={ debug === false ? gameStyle : null}
@@ -52,7 +77,7 @@ const Game = ({
           <canvas id="debug-matter-canvas" />
         )}
       </GameEngine>
-    </>
+    </div>
   );
 }
 

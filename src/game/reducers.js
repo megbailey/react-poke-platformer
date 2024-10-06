@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { totalHearts } from "./config";
 
 export const gameSlice = createSlice({
     name: "game",
@@ -6,6 +7,7 @@ export const gameSlice = createSlice({
         value : {
             isRunning: false,
             scrollPosition: 0,
+            hearts: totalHearts,
             consumedBodies: [],
             bag: {
                 pokeballs: 0,
@@ -14,9 +16,17 @@ export const gameSlice = createSlice({
     },
     reducers: {
         consume: (state, action) => {
+            let isPokeball = 0
+            if ( action.payload.includes("pokeball") ) {
+                isPokeball = 1
+            }
+
             state.value = {
                 ...state.value,
-                "consumedBodies": [
+                bag: {
+                    pokeballs: state.value.bag.pokeballs + isPokeball
+                },
+                consumedBodies: [
                     ...state.value.consumedBodies,
                     action.payload
                 ]

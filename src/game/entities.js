@@ -67,7 +67,8 @@ export default async (renderState) => {
 		gameHeight, 
 		{ 
 			isStatic: true,
-			label: 'Right Wal'
+			label: 'Right Wall',
+			friction: 0
 		}
 	);
 	const wallLeft = Bodies.rectangle(
@@ -77,7 +78,8 @@ export default async (renderState) => {
 		gameHeight, 
 		{ 
 			isStatic: true,
-			label: 'Left Wall'
+			label: 'Left Wall',
+			friction: 0
 		}
 	);
  	const ceiling = Bodies.rectangle(
