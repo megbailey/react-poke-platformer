@@ -38,8 +38,6 @@ const DamagedHeart = ( props ) => {
 
 
 const Health = (props) => { 
-    const { style } = props
-
     const gameState = useSelector((state) => state.game.value)
     
     let heartsToRender = [ ]

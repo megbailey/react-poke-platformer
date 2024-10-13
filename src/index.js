@@ -17,7 +17,7 @@ root.render(
         }}
     > 
         <PokeGame 
-            width={ width * .9 }
+            width={ width * .7 }
             height={ height * .3334 }
             //debug={true}
         />

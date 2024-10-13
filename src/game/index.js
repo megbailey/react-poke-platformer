@@ -7,6 +7,7 @@ import Systems from "./systems/index.js";
 
 import store from './store.js';
 import TopBar from "./components/TopBar.jsx";
+import { LeftGamePad, RightGamePad } from "./components/GamePad.jsx";
 
 const Game = ({
   width, 
@@ -32,27 +33,79 @@ const Game = ({
     position: 'relative'
   }
 
-  const barHeight = height/10
-  
+
   return (
-    <div id="game-container">
-      <TopBar height={barHeight} />
-      <GameEngine
-        id="game-engine"
-        //ref={(ref) => { gameEngine.current = ref; } }
-        style={ debug === false ? gameStyle : null}
-        running={true}
-        systems={Systems} // collection of functions ran per tick
-        entities={ Entities({
-          gameWidth: width, 
-          gameHeight: height,
-          debug: debug
-        })}
+    <div 
+      id="game-container" 
+      style={{   
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <div 
+        className="left-content" 
+        style={{  
+          backgroundColor: 'purple', 
+          height: `${height + 50}px`,
+          width: `${width/6}px`,
+          borderRadius: '15px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
       > 
-        { debug === true && (
-          <canvas id="debug-matter-canvas" />
-        )}
-      </GameEngine>
+        <LeftGamePad />
+      </div>
+      <div 
+        className="middle-content"
+        style={{
+          paddingTop: `10px`,
+          paddingBottom: `20px`,
+          backgroundColor: 'purple',
+          borderRadius: '15px',
+        }}
+      > 
+        <div 
+          className="game"
+          style={{  
+            border: 'solid',
+            borderWidth: '5px',
+            borderRadius: '25px'
+          }}
+        >
+          <TopBar height={20} />
+          <GameEngine
+            id="game-engine"
+            //ref={(ref) => { gameEngine.current = ref; } }
+            style={ debug === false ? gameStyle : null}
+            running={true}
+            systems={Systems} // collection of functions ran per tick
+            entities={ Entities({
+              gameWidth: width, 
+              gameHeight: height,
+              debug: debug
+            })}
+          > 
+            { debug === true && (
+              <canvas id="debug-matter-canvas" />
+            )}
+          </GameEngine>
+        </div>
+      </div>
+      <div 
+        className="right-content"
+        style={{  
+          backgroundColor: 'purple', 
+          height: `${height + 50}px`,
+          width: `${width/6}px`,
+          borderRadius: '15px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      > 
+        <RightGamePad />
+      </div>
     </div>
   );
 }
