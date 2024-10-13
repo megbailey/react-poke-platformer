@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 
 
-import Trees from '../assets/img/trees.png'
+import Trees from '../assets/img/backgrounds/trees.png'
 
 //import DesertA from '../assets/img/desert_a.png'
 //import MountainA from '../assets/img/mountains_a.png'

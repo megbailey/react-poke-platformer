@@ -44,15 +44,15 @@ const Health = (props) => {
     
     let heartsToRender = [ ]
     for ( let i = 0; i < gameState.hearts; i++ ) {
-        heartsToRender.push( <FullHeart /> )
+        heartsToRender.push( <FullHeart key={i} /> )
     }
 
     if (( gameState.hearts % 1) > 0 ) {
-        heartsToRender.push( <HalfHeart /> )
+        heartsToRender.push( <HalfHeart key={i} /> )
     }
 
     for ( let i = gameState.hearts; i < 5; i++ ) {
-        heartsToRender.push( <DamagedHeart /> )
+        heartsToRender.push( <DamagedHeart key={i} /> )
     }
 
     return (

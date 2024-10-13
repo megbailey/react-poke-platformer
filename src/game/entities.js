@@ -11,13 +11,13 @@ import { ForestBackground } from './components/Background.jsx';
 import Floor from "./components/Floor.jsx";
 import Item from './components/Item.jsx';
 
-import floorTile from './assets/img/nature-paltformer-floor-tile.png';
-import mdPlatform from './assets/img/nature-paltformer-tile-md.png';
-import lgPlatform from './assets/img/nature-paltformer-tile-lg.png';
-import sprite1 from './assets/img/trainer-sprite-1.png';
+import floorTile from './assets/img/platforms/nature-paltformer-floor-tile.png';
+import mdPlatform from './assets/img/platforms/nature-paltformer-tile-md.png';
+import lgPlatform from './assets/img/platforms/nature-paltformer-tile-lg.png';
+import sprite1 from './assets/img/trainers/trainer-sprite-1.png';
 import pokeball from './assets/img/pokeball.svg';
 
-import { getRandomInteger } from './utils.js';
+import { getRandomInteger } from './utils/index.js';
 
 let Engine = Matter.Engine;
 let Bodies = Matter.Bodies;

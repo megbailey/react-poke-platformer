@@ -1,15 +1,12 @@
 import React, { useRef } from "react";
 import { GameEngine } from "react-game-engine";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 
 
 import store from './store.js';
-
-import pokeball from './assets/img/pokeball.svg';
-import Health from "./components/Health.jsx";
-
+import TopBar from "./components/TopBar.jsx";
 
 const Game = ({
   width, 
@@ -19,7 +16,6 @@ const Game = ({
 }) => {
 
   const gameEngine = useRef(null);
-  const gameState = useSelector((state) => state.game.value)
  
   /* function updateWindowDimensions() {
     const newState = { windowWidth: width, windowHeight: (height) }
@@ -36,33 +32,13 @@ const Game = ({
     position: 'relative'
   }
 
+  const barHeight = height/10
+  
   return (
     <div id="game-container">
-      <div 
-        id='game-top'
-        style={{ 
-          height: height/10,
-          display: 'flex'
-        }}
-      >
-       <Health />
-        <div 
-          id='pokeballs' 
-          style={{ display: 'flex' }}
-        >
-          <img 
-              style={{ 
-                height: `${16}px`,
-                width: `${16}px`,
-              }}
-              src={pokeball}
-          />
-          <div key={gameState.bag.pokeballs}>
-            {gameState.bag.pokeballs}
-          </div>
-        </div>
-      </div>
+      <TopBar height={barHeight} />
       <GameEngine
+        id="game-engine"
         //ref={(ref) => { gameEngine.current = ref; } }
         style={ debug === false ? gameStyle : null}
         running={true}

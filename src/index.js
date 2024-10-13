@@ -13,7 +13,7 @@ root.render(
     <div
         style={{
             padding: '5%',
-            background: 'black',
+            //background: 'black',
         }}
     > 
         <PokeGame 
