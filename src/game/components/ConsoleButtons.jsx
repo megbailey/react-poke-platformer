@@ -8,7 +8,8 @@ const ConsoleButton = ({
     width,
     height,
     left = 0,
-    top = 0
+    top = 0,
+    scale = 2
 }) => {
 
     return (
@@ -19,7 +20,7 @@ const ConsoleButton = ({
                 height: `${height}px`,
                 width: `${width}px`,
                 overflow: `hidden`,
-                transform: `scale(2, 2)`
+                transform: `scale(${scale}, ${scale})`
             }}
         >
             <img 
@@ -36,11 +37,12 @@ const SwitchButton = ({
     style,
     isSelected = false,
     left = 0,
+    top = 0,
     height = 16, 
     width = 16
 }) => {
-    if ( isSelected ) return <ConsoleButton style={style} src={switchButtons} height={height} width={width} left={left} top={16}/>
-    return <ConsoleButton style={style} src={switchButtons} height={height} width={width} left={left} />
+    if ( isSelected ) return <ConsoleButton style={style} src={switchButtons} height={height} width={width} left={left} top={top + 16}/>
+    return <ConsoleButton style={style} src={switchButtons} height={height} width={width} left={left} top={top}/>
 }
 
 export const AButton = ({ isSelected, style }) => { 
@@ -67,14 +69,23 @@ export const MinusButton = ({ isSelected, style }) => {
     return <SwitchButton style={style} isSelected={isSelected} />
 }
 
+export const ScreenshotButton = ({ isSelected, style }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} top={32}/>
+}
+
+export const HomeButton = ({ isSelected, style }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} left={208}/>
+}
+
 const XboxButton = ({ 
     style,
     top = 0,
     left = 0,
     height = 32, 
     width = 32,
+    scale = 2.5
 }) => {
-    return <ConsoleButton style={style} src={xboxButtons} height={height} width={width} left={left} top={top}/>
+    return <ConsoleButton style={style} src={xboxButtons} height={height} width={width} left={left} top={top} scale={scale}/>
 }
 
 export const DPad = ({ 
@@ -97,5 +108,5 @@ export const DPad = ({
     else if ( isLeftSelected )
         return <XboxButton  style={style} top={32} left={160}/>
 
-    return <XboxButton style={style} top={32} />
+    return <XboxButton style={style} top={31.5} />
 }

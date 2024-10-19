@@ -18,7 +18,9 @@ const Floor = ({
                 width: `${width}px`,
                 height: `${height}px`,
                 top: `${y}px`,
-                left: `${x}px`
+                left: `${x}px`,
+                borderBottomLeftRadius: '20px',
+                borderBottomRightRadius: '20px'
             }}  
         />
     );

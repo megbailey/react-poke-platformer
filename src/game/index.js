@@ -6,8 +6,7 @@ import Systems from "./systems/index.js";
 
 
 import store from './store.js';
-import TopBar from "./components/TopBar.jsx";
-import { LeftGamePad, RightGamePad } from "./components/GamePad.jsx";
+import Console from "./components/Console.jsx";
 
 const Game = ({
   width, 
@@ -42,39 +41,8 @@ const Game = ({
         alignItems: 'center',
       }}
     >
-      <div 
-        className="left-content" 
-        style={{  
-          backgroundColor: 'purple', 
-          height: `${height + 50}px`,
-          width: `${width/6}px`,
-          borderRadius: '15px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      > 
-        <LeftGamePad />
-      </div>
-      <div 
-        className="middle-content"
-        style={{
-          paddingTop: `10px`,
-          paddingBottom: `20px`,
-          backgroundColor: 'purple',
-          borderRadius: '15px',
-        }}
-      > 
-        <div 
-          className="game"
-          style={{  
-            border: 'solid',
-            borderWidth: '5px',
-            borderRadius: '25px'
-          }}
-        >
-          <TopBar height={20} />
-          <GameEngine
+      <Console height={height}>
+          <GameEngine 
             id="game-engine"
             //ref={(ref) => { gameEngine.current = ref; } }
             style={ debug === false ? gameStyle : null}
@@ -90,22 +58,7 @@ const Game = ({
               <canvas id="debug-matter-canvas" />
             )}
           </GameEngine>
-        </div>
-      </div>
-      <div 
-        className="right-content"
-        style={{  
-          backgroundColor: 'purple', 
-          height: `${height + 50}px`,
-          width: `${width/6}px`,
-          borderRadius: '15px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      > 
-        <RightGamePad />
-      </div>
+        </Console> 
     </div>
   );
 }

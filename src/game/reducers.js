@@ -11,7 +11,8 @@ export const gameSlice = createSlice({
             consumedBodies: [],
             bag: {
                 pokeballs: 0,
-            }
+            },
+            activeKeyPress: null
         }
     },
     reducers: {
@@ -50,6 +51,12 @@ export const gameSlice = createSlice({
                     scrollPosition: state.value.scrollPosition + .5
                 }
         },
+        keyPress: (state, action) => {
+            state.value = {
+                ...state.value,
+                activeKeyPress: action.payload
+            }
+        }
     }
 })
 
@@ -96,6 +103,6 @@ export const spriteSlice = createSlice({
 })
 
 export const { direction } = spriteSlice.actions;
-export const { consume, running, scroll } = gameSlice.actions;
+export const { consume, running, scroll, keyPress } = gameSlice.actions;
 
 
