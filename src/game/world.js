@@ -1,11 +1,9 @@
 import Matter from 'matter-js';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const World = ({ 
   engine, 
   entities = [], 
-  gameWidth: width, 
-  gameHeight: height, 
   debug = false 
 }) => {
 
@@ -14,16 +12,12 @@ const World = ({
     Matter.World.add( engine.world, entities );
   } 
   useEffect(() => {
-    // render canvas only when debugging
+    // only render on canvas when debug == true
     const debugCanvas = document.getElementById('debug-matter-canvas')
     if ( debug === true && debugCanvas) {
       var render = Matter.Render.create({
         canvas: debugCanvas,
         engine: engine,
-        options: { 
-          width: width, 
-          height: height,
-        }
       });
   
       Matter.Render.run(render);

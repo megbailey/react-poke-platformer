@@ -23,13 +23,16 @@ const Game = ({
     gameEngine.current.swap(Entities({ ...newState}))
   }
   */
+
+  const controllerWidth = 214
   
   const gameStyle = {
-    width: width, 
+    width: width - controllerWidth, 
     height: height, 
     overflow: 'hidden',
     // must set position to relative so that other css positioning is relative to this container
-    position: 'relative'
+    position: 'relative',
+    borderRadius: '20px'
   }
 
 
@@ -43,13 +46,13 @@ const Game = ({
     >
       <Console height={height}>
           <GameEngine 
-            id="game-engine"
-            //ref={(ref) => { gameEngine.current = ref; } }
-            style={ debug === false ? gameStyle : null}
+            className="game-engine"
+            ref={(ref) => { gameEngine.current = ref; } }
+            style={gameStyle}
             running={true}
             systems={Systems} // collection of functions ran per tick
             entities={ Entities({
-              gameWidth: width, 
+              gameWidth: gameStyle.width, 
               gameHeight: height,
               debug: debug
             })}
