@@ -7,9 +7,9 @@ const ConsoleButton = ({
     src,
     width,
     height,
+    scale,
     left = 0,
     top = 0,
-    scale = 2
 }) => {
 
     return (
@@ -38,43 +38,65 @@ const SwitchButton = ({
     isSelected = false,
     left = 0,
     top = 0,
-    height = 16, 
-    width = 16
+    scale = 2
 }) => {
-    if ( isSelected ) return <ConsoleButton style={style} src={switchButtons} height={height} width={width} left={left} top={top + 16}/>
-    return <ConsoleButton style={style} src={switchButtons} height={height} width={width} left={left} top={top}/>
+    const width = 16
+    const height = 16
+    if ( isSelected ) return (
+        <ConsoleButton 
+            style={style} 
+            src={switchButtons} 
+            height={height} 
+            width={width} 
+            scale={scale} 
+            left={left} 
+            top={top + 16}
+        />
+    )
+    return (
+        <ConsoleButton 
+            style={style} 
+            src={switchButtons} 
+            height={height} 
+            width={width}
+            scale={scale} 
+            left={left} 
+            top={top}
+        />
+    )
 }
 
-export const AButton = ({ isSelected, style }) => { 
-    return <SwitchButton style={style} isSelected={isSelected} left={48} />
+
+export const AButton = ({ isSelected, style, scale }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} scale={scale} left={48} />
 }
 
-export const BButton = ({ isSelected, style }) => { 
-    return <SwitchButton style={style} isSelected={isSelected} left={64} />
+export const BButton = ({ isSelected, style, scale }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} scale={scale} left={64} />
 }
 
-export const XButton = ({ isSelected, style }) => { 
-    return <SwitchButton style={style} isSelected={isSelected} left={80} />
+export const XButton = ({ isSelected, style, scale }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} scale={scale} left={80} />
 }
 
-export const YButton = ({ isSelected, style }) => { 
-    return <SwitchButton style={style} isSelected={isSelected} left={96} />
+export const YButton = ({ isSelected, style, scale }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} scale={scale} left={96} />
 }
 
-export const PlusButton = ({ isSelected, style }) => { 
-    return <SwitchButton style={style} isSelected={isSelected} left={16} />
+export const PlusButton = ({ isSelected, style, scale }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} scale={scale} left={16} />
 }
 
-export const MinusButton = ({ isSelected, style }) => { 
-    return <SwitchButton style={style} isSelected={isSelected} />
+export const MinusButton = ({ isSelected, style, scale }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} scale={scale} />
 }
 
-export const ScreenshotButton = ({ isSelected, style }) => { 
-    return <SwitchButton style={style} isSelected={isSelected} top={32}/>
+export const ScreenshotButton = ({ isSelected, style, scale }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} scale={scale} top={32}/>
 }
 
-export const HomeButton = ({ isSelected, style }) => { 
-    return <SwitchButton style={style} isSelected={isSelected} left={208}/>
+export const HomeButton = ({ isSelected, style, scale }) => { 
+    return <SwitchButton style={style} isSelected={isSelected} scale={scale} left={208}/>
 }
 
 const XboxButton = ({ 
@@ -90,6 +112,7 @@ const XboxButton = ({
 
 export const DPad = ({ 
     style,
+    scale,
     inactive, 
     isLeftSelected, 
     isRightSelected, 
@@ -98,15 +121,15 @@ export const DPad = ({
 }) => { 
 
     if ( inactive )
-        return <XboxButton style={style} top={32} left={32}/>
+        return <XboxButton style={style} scale={scale} top={32} left={32}/>
     else if ( isTopSelected )
-        return <XboxButton style={style} top={32} left={64}/>
+        return <XboxButton style={style} scale={scale} top={32} left={64}/>
     else if ( isBottomSelected )
-        return <XboxButton style={style} top={32} left={96}/>
+        return <XboxButton style={style} scale={scale} top={32} left={96}/>
     else if ( isRightSelected )
-        return <XboxButton style={style} top={32} left={128}/>
+        return <XboxButton style={style} scale={scale} top={32} left={128}/>
     else if ( isLeftSelected )
-        return <XboxButton  style={style} top={32} left={160}/>
+        return <XboxButton style={style} scale={scale} top={32} left={160}/>
 
-    return <XboxButton style={style} top={31.5} />
+    return <XboxButton style={style} scale={scale} top={31.5} />
 }

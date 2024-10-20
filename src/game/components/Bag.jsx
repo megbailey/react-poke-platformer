@@ -21,7 +21,10 @@ const Bag = () => {
                     }}
                     src={pokeball}
                 />
-                <span key={gameState.bag.pokeballs}>{gameState.bag.pokeballs}</span>
+                <span 
+                    key={gameState.bag.pokeballs}
+                    style={{ color: 'black' }}
+                >{gameState.bag.pokeballs}</span>
             </div>
         </div>
     )

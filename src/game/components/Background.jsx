@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 
+import TopBar from './TopBar.jsx';
+
 
 import Trees from '../assets/img/backgrounds/trees.png'
 
@@ -9,15 +11,14 @@ import Trees from '../assets/img/backgrounds/trees.png'
 
 const Background = ({ 
   src, 
-  color, 
   style,
-  width, 
-  height, 
   children 
 }) => {
 
   const gameState = useSelector((state) => state.game.value)
-  let transformPosition = gameState.scrollPosition
+  const transformPosition = gameState.scrollPosition
+  const gameWidth = gameState.totalWidth
+  const gameHeight = gameState.totalHeight
 
   return (
     <div
@@ -33,38 +34,31 @@ const Background = ({
         style={{
           ...style,
           transform: `translateX(${transformPosition}px)`,
-          width: `${width * 10}px`, // very large width for infinite scroll
-          height: `${height}px`,
+          width: `${gameWidth * 10}px`, // very large width for infinite scroll
+          height: `${gameHeight}px`,
           backgroundSize: 'auto',
-          backgroundColor: `${color}`,
           backgroundImage: `url(${src})`,
           backgroundRepeat: 'repeat-x',
         }}
-      >
-          {children}
-      </div>
+      />
     </div>
   )
     
 }
 
-export const ForestBackground = ({
-  gameHeight: height,
-  gameWidth: width,
-  children
-}) => {
+export const ForestBackground = () => {
   return (
-    <Background
-        color="#8abdf0"
-        width={width}
-        height={height}
-        src={Trees}
-        style={{
-          backgroundPosition: 'center bottom 48px', // start background at floor height
-        }}
+    <div 
+      id="environment"
+      style={{ backgroundColor: "#8abdf0" }}
     >
-      {children}
-    </Background>
+      <TopBar height={20} />
+      <Background
+          src={Trees}
+          // start background at floor height
+          style={{ backgroundPosition: 'center bottom 48px' }}
+      />
+    </div>
   )
 }
 

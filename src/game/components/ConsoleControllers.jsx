@@ -39,13 +39,17 @@ export const LeftController = ({ type }) => {
                     left: '60px'
                 }}
             >
-                <MinusButton />
+                <MinusButton 
+                    scale={type === 'vertical' ? 3 : 2}
+                />
             </div>
             <div 
                 id='c-controller--left-middle' 
                 style={{ marginRight: type === 'vertical' ? gameWidth/4 : 0 }}
+                scale={type === 'vertical' ? 3 : 2}
             >
                 <DPad 
+                    scale={type === 'vertical' ? 3.5 : 2}
                     isLeftSelected={ keyPress === 'DPAD-LEFT'}
                     isRightSelected={ keyPress === 'DPAD-RIGHT' }
                     isTopSelected={ keyPress === 'DPAD-UP' }
@@ -59,7 +63,9 @@ export const LeftController = ({ type }) => {
                     left: '60px'
                 }}
             >
-                <ScreenshotButton />
+                <ScreenshotButton 
+                    scale={type === 'vertical' ? 3 : 2} 
+                />
             </div>
         </div>  
     )
@@ -95,7 +101,9 @@ export const RightController = ({ type }) => {
                     left: '10px'
                 }}
             >
-                <PlusButton />
+                <PlusButton 
+                    scale={type === 'vertical' ? 3 : 2} 
+                />
             </div>
             <div 
                 id='c-right-controller--middle'
@@ -103,8 +111,8 @@ export const RightController = ({ type }) => {
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr 1fr', /* 3 columns */
                     gridTemplateRows: '1fr 1fr 1fr',    /* 3 rows */
-                    width: '80px', /* Adjust the width based on button size */
-                    height: '80px', /* Adjust the height based on button size */
+                    width: type === 'vertical' ? '110px' : '80px',
+                    height: type === 'vertical' ? '110px' : '80px', 
                     justifyItems: 'center', /* Center buttons horizontally */
                     alignItems: 'center', /* Center buttons vertically */
                     marginLeft: type === 'vertical' ? gameWidth/4 : 0
@@ -112,18 +120,22 @@ export const RightController = ({ type }) => {
             >
                 <AButton 
                     style={{ gridColumn: 3, gridRow: 2 }} 
+                    scale={type === 'vertical' ? 3 : 2}
                     isSelected={ keyPress === 'ACTION-A' }
                 />
                 <BButton 
                     style={{ gridColumn: 2, gridRow: 3 }} 
+                    scale={type === 'vertical' ? 3 : 2}
                     isSelected={ keyPress === 'ACTION-B' }
                 />
                 <XButton
                     style={{ gridColumn: 2, gridRow: 1 }} 
+                    scale={type === 'vertical' ? 3 : 2}
                     isSelected={ keyPress === 'ACTION-X' }
                 />
                 <YButton 
                     style={{ gridColumn: 1, gridRow: 2 }} 
+                    scale={type === 'vertical' ? 3 : 2}
                     isSelected={ keyPress === 'ACTION-Y' }
                 />
             </div>
@@ -138,7 +150,9 @@ export const RightController = ({ type }) => {
                     left: '10px'
                 }}
             >
-                <HomeButton />
+                <HomeButton 
+                    scale={type === 'vertical' ? 3 : 2} 
+                />
             </div>
         </div>
     )

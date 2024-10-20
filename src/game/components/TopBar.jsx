@@ -15,10 +15,8 @@ const TopBar = ( props ) => {
             style={{ 
                 height: height,
                 display: 'flex',
-                justifyContent: 'center',
-                backgroundColor: 'black',
-                borderTopLeftRadius: '25px',
-                borderTopRightRadius: '25px'
+                justifyContent: 'left',
+                marginLeft: '25px'
             }}
         >
             <Health />
