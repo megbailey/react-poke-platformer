@@ -45,11 +45,11 @@ export const LeftController = ({ type }) => {
             </div>
             <div 
                 id='c-controller--left-middle' 
-                style={{ marginRight: type === 'vertical' ? gameWidth/4 : 0 }}
+                style={{ marginRight: type === 'vertical' ? gameWidth/2.4 : 0 }}
                 scale={type === 'vertical' ? 3 : 2}
             >
                 <DPad 
-                    scale={type === 'vertical' ? 3.5 : 2}
+                    scale={type === 'vertical' ? 3.5 : 2.5}
                     isLeftSelected={ keyPress === 'DPAD-LEFT'}
                     isRightSelected={ keyPress === 'DPAD-RIGHT' }
                     isTopSelected={ keyPress === 'DPAD-UP' }
@@ -64,7 +64,7 @@ export const LeftController = ({ type }) => {
                 }}
             >
                 <ScreenshotButton 
-                    scale={type === 'vertical' ? 3 : 2} 
+                    scale={type === 'vertical' ? 2.5 : 2} 
                 />
             </div>
         </div>  
@@ -115,27 +115,27 @@ export const RightController = ({ type }) => {
                     height: type === 'vertical' ? '110px' : '80px', 
                     justifyItems: 'center', /* Center buttons horizontally */
                     alignItems: 'center', /* Center buttons vertically */
-                    marginLeft: type === 'vertical' ? gameWidth/4 : 0
+                    marginLeft: type === 'vertical' ? gameWidth/2.4 : 0
                 }}
             >
                 <AButton 
                     style={{ gridColumn: 3, gridRow: 2 }} 
-                    scale={type === 'vertical' ? 3 : 2}
+                    scale={type === 'vertical' ? 2.5 : 2}
                     isSelected={ keyPress === 'ACTION-A' }
                 />
                 <BButton 
                     style={{ gridColumn: 2, gridRow: 3 }} 
-                    scale={type === 'vertical' ? 3 : 2}
+                    scale={type === 'vertical' ? 2.5 : 2}
                     isSelected={ keyPress === 'ACTION-B' }
                 />
                 <XButton
                     style={{ gridColumn: 2, gridRow: 1 }} 
-                    scale={type === 'vertical' ? 3 : 2}
+                    scale={type === 'vertical' ? 2.5 : 2}
                     isSelected={ keyPress === 'ACTION-X' }
                 />
                 <YButton 
                     style={{ gridColumn: 1, gridRow: 2 }} 
-                    scale={type === 'vertical' ? 3 : 2}
+                    scale={type === 'vertical' ? 2.5 : 2}
                     isSelected={ keyPress === 'ACTION-Y' }
                 />
             </div>
@@ -151,7 +151,7 @@ export const RightController = ({ type }) => {
                 }}
             >
                 <HomeButton 
-                    scale={type === 'vertical' ? 3 : 2} 
+                    scale={type === 'vertical' ? 2.5 : 2} 
                 />
             </div>
         </div>

@@ -22,6 +22,7 @@ const HorizontalConsole = ({ children }) => {
                     height: `${gameHeight + 30}px`,
                     padding: '10px',
                     border: 'solid',
+                    borderColor: 'black',
                     borderWidth: '3px',
                     borderRadius: '25px',
                 }}
@@ -37,6 +38,7 @@ const HorizontalConsole = ({ children }) => {
                 paddingLeft: `10px`,
                 paddingRight: `10px`,
                 border: 'solid',
+                borderColor: 'black',
                 borderWidth: '3px 0px',
                 borderRadius: '25px',
             }}
@@ -45,6 +47,7 @@ const HorizontalConsole = ({ children }) => {
                 id="c-console-game-window"
                 style={{  
                     border: 'solid',
+                    borderColor: 'black',
                     borderWidth: '3px',
                     borderRadius: '25px'
                 }}
@@ -59,6 +62,7 @@ const HorizontalConsole = ({ children }) => {
                 height: `${gameHeight + 30}px`,
                 padding: '10px',
                 border: 'solid',
+                borderColor: 'black',
                 borderWidth: '3px',
                 borderRadius: '25px',
             }}
@@ -74,6 +78,7 @@ const VerticalConsole = ({ children }) => {
     const gameWidth = gameState.totalWidth
     const gameHeight = gameState.totalHeight
     
+    console.log(gameWidth/2.4)
     return (
         <div 
             id="c-console-vertical" 
@@ -87,8 +92,9 @@ const VerticalConsole = ({ children }) => {
                 id="c-console--top" 
                 style={{  
                     backgroundColor: 'purple', 
-                    padding: '17px',
+                    padding: '15px',
                     border: 'solid',
+                    borderColor: 'black',
                     borderWidth: '3px',
                     borderTopLeftRadius: '25px',
                     borderTopRightRadius: '25px',
@@ -98,6 +104,7 @@ const VerticalConsole = ({ children }) => {
                     id="c-console-game-window"
                     style={{  
                         border: 'solid',
+                        borderColor: 'black',
                         borderWidth: '3px',
                         borderRadius: '25px',
                     }}
@@ -112,8 +119,9 @@ const VerticalConsole = ({ children }) => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 backgroundColor: 'purple',
-                padding: '20px',
+                padding: '18px',
                 border: 'solid',
+                borderColor: 'black',
                 borderLeftWidth: '3px',
                 borderRightWidth: '3px',
                 borderBottomWidth: '3px',
@@ -125,7 +133,7 @@ const VerticalConsole = ({ children }) => {
         > 
             <div 
                 id="c-console--bottom-left"
-                style={{ marginRight: 50 }}
+                style={{ marginRight: gameWidth/10 }}
             > 
                 <LeftController type='vertical' />
             </div>
