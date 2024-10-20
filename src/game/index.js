@@ -1,33 +1,31 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { GameEngine } from "react-game-engine";
 import { Provider } from "react-redux";
 import Entities from "./entities.js";
 import Systems from "./systems/index.js";
 
-
 import store from './store.js';
+import { dimmensions } from './reducers.js';
+
 import Console from "./components/Console.jsx";
 
-const Game = ({
-  width, 
-  height, 
-  debug = false, 
-  ...props 
-}) => {
-
+const Game = (props) => {
+  const { 
+    width, 
+    height, 
+    debug = false, 
+  } = props
   const gameEngine = useRef(null);
- 
-  /* function updateWindowDimensions() {
-    const newState = { windowWidth: width, windowHeight: (height) }
-    setWindowState(newState)
-    gameEngine.current.swap(Entities({ ...newState}))
-  }
-  */
+  const consoleType = width < 500 ? 'vertical' : 'horizontal'
 
-  const controllerWidth = 214
+  useEffect(() => {
+    store.dispatch( 
+      dimmensions({ width: width, height: height }) 
+    );
+  }, [])
   
   const gameStyle = {
-    width: width - controllerWidth, 
+    width: width - (consoleType === 'horizontal' ? 214 : 0), 
     height: height, 
     overflow: 'hidden',
     // must set position to relative so that other css positioning is relative to this container
@@ -35,16 +33,9 @@ const Game = ({
     borderRadius: '20px'
   }
 
-
   return (
-    <div 
-      id="game-container" 
-      style={{   
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      <Console height={height}>
+    <div id="game-container" >
+      <Console type={consoleType}>
           <GameEngine 
             className="game-engine"
             ref={(ref) => { gameEngine.current = ref; } }

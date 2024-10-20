@@ -14,24 +14,25 @@ import {
 } from "./ConsoleButtons.jsx";
 
 
-export const LeftController = ({ }) => {
+export const LeftController = ({ type }) => {
     const gameState = useSelector((state) => state.game.value)
     let keyPress = gameState.activeKeyPress
+    let gameWidth = gameState.totalWidth
 
     return (
         <div 
-            className='c-controller-left'
+            id='c-controller-left'
             style={{ 
                 display: 'flex',
                 flexDirection: 'column', 
                 justifyContent: 'center', 
                 alignItems: 'center',
                 height: '100%', /* Ensure the full height is utilized */
-                width: '85px', /* Ensure the full width is utilized */
+                width: '85px',
                 position: 'relative' /* Required for absolute positioning */
             }}
         >
-            <div className='c-controller--left-top' 
+            <div id='c-controller--left-top' 
                 style={{ 
                     position: 'absolute',
                     top: '10px', 
@@ -40,7 +41,10 @@ export const LeftController = ({ }) => {
             >
                 <MinusButton />
             </div>
-            <div className='c-controller--left-middle'>
+            <div 
+                id='c-controller--left-middle' 
+                style={{ marginRight: type === 'vertical' ? gameWidth/4 : 0 }}
+            >
                 <DPad 
                     isLeftSelected={ keyPress === 'DPAD-LEFT'}
                     isRightSelected={ keyPress === 'DPAD-RIGHT' }
@@ -48,7 +52,7 @@ export const LeftController = ({ }) => {
                     isBottomSelected={ keyPress === 'DPAD-DOWN' }
                 />
             </div>
-            <div className='c-controller--left-bottom' 
+            <div id='c-controller--left-bottom' 
                 style={{ 
                     position: 'absolute',
                     bottom: '20px', 
@@ -61,13 +65,15 @@ export const LeftController = ({ }) => {
     )
 }
 
-export const RightController = ({ }) => {
+export const RightController = ({ type }) => {
 
     const gameState = useSelector((state) => state.game.value)
     let keyPress = gameState.activeKeyPress
+    let gameWidth = gameState.totalWidth
 
     return (
-        <div className='c-controller--right'
+        <div 
+            id='c-right-controller'
             style={{ 
                 display: 'flex',
                 flexDirection: 'column', 
@@ -78,7 +84,8 @@ export const RightController = ({ }) => {
                 position: 'relative' /* Required for absolute positioning */
             }}
         >
-            <div className='c-controller--right-top' 
+            <div 
+                id='c-right-controller--top' 
                 style={{ 
                     display: 'flex', 
                     justifyContent: 'flex-start', 
@@ -90,7 +97,8 @@ export const RightController = ({ }) => {
             >
                 <PlusButton />
             </div>
-            <div className='c-controller--right-middle c-gamepad--action-buttons'
+            <div 
+                id='c-right-controller--middle'
                 style={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr 1fr', /* 3 columns */
@@ -98,7 +106,8 @@ export const RightController = ({ }) => {
                     width: '80px', /* Adjust the width based on button size */
                     height: '80px', /* Adjust the height based on button size */
                     justifyItems: 'center', /* Center buttons horizontally */
-                    alignItems: 'center' /* Center buttons vertically */
+                    alignItems: 'center', /* Center buttons vertically */
+                    marginLeft: type === 'vertical' ? gameWidth/4 : 0
                 }}
             >
                 <AButton 
@@ -118,7 +127,8 @@ export const RightController = ({ }) => {
                     isSelected={ keyPress === 'ACTION-Y' }
                 />
             </div>
-            <div className='c-controller--right-bottom' 
+            <div 
+                id='c-right-controller--bottom' 
                 style={{ 
                     display: 'flex',
                     justifyContent: 'flex-start',

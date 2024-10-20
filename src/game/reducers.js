@@ -6,6 +6,8 @@ export const gameSlice = createSlice({
     initialState: { 
         value : {
             isRunning: false,
+            totalHeight: 0,
+            totalWidth: 0,
             scrollPosition: 0,
             hearts: totalHearts,
             consumedBodies: [],
@@ -33,6 +35,19 @@ export const gameSlice = createSlice({
                 ]
             }
         },
+        dimmensions: (state, action) => {
+            state.value = {
+                ...state.value,
+                totalHeight: action.payload.height ?? state.value.totalHeight,
+                totalWidth: action.payload.width ?? state.value.totalWidth,
+            }
+        },
+        keyPress: (state, action) => {
+            state.value = {
+                ...state.value,
+                activeKeyPress: action.payload
+            }
+        },
         running: (state, action) => {
             state.value = {
                 ...state.value,
@@ -50,13 +65,7 @@ export const gameSlice = createSlice({
                     ...state.value,
                     scrollPosition: state.value.scrollPosition + .5
                 }
-        },
-        keyPress: (state, action) => {
-            state.value = {
-                ...state.value,
-                activeKeyPress: action.payload
-            }
-        }
+        },    
     }
 })
 
@@ -103,6 +112,6 @@ export const spriteSlice = createSlice({
 })
 
 export const { direction } = spriteSlice.actions;
-export const { consume, running, scroll, keyPress } = gameSlice.actions;
+export const { consume, dimmensions, keyPress, running, scroll } = gameSlice.actions;
 
 
