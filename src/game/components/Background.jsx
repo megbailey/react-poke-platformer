@@ -34,8 +34,8 @@ const Background = ({
         style={{
           ...style,
           transform: `translateX(${transformPosition}px)`,
-          width: `${gameWidth * 10}px`, // very large width for infinite scroll
-          height: `${gameHeight}px`,
+          width: `${gameWidth * 10}px`, /* very large width for infinite scroll */
+          height: `${gameHeight - 30 /* window padding */ - 6 /* border widths */ }px`,
           backgroundSize: 'auto',
           backgroundImage: `url(${src})`,
           backgroundRepeat: 'repeat-x',
@@ -49,7 +49,7 @@ const Background = ({
 export const ForestBackground = () => {
   return (
     <div 
-      id="environment"
+      id="background"
       style={{ backgroundColor: "#8abdf0" }}
     >
       <TopBar height={20} />

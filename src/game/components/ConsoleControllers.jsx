@@ -28,24 +28,28 @@ export const LeftController = ({ type }) => {
                 justifyContent: 'center', 
                 alignItems: 'center',
                 height: '100%', /* Ensure the full height is utilized */
-                width: '85px',
+                width: '100%', /* Ensure the full width is utilized */
                 position: 'relative' /* Required for absolute positioning */
             }}
         >
             <div id='c-controller--left-top' 
                 style={{ 
                     position: 'absolute',
-                    top: '10px', 
-                    left: '60px'
+                    top: '15px', 
+                    left: type === 'vertical' ? '85%' : '65%'
                 }}
             >
-                <MinusButton 
-                    scale={type === 'vertical' ? 3 : 2}
-                />
+                <MinusButton scale={type === 'vertical' ? 3 : 2} />
             </div>
             <div 
                 id='c-controller--left-middle' 
-                style={{ marginRight: type === 'vertical' ? gameWidth/2.4 : 0 }}
+                style={{ 
+                    height: '50%',
+                    width: '50%',
+                    display: 'flex',
+                    justifyContent: 'center', 
+                    alignItems: 'center'
+                }}
                 scale={type === 'vertical' ? 3 : 2}
             >
                 <DPad 
@@ -60,12 +64,10 @@ export const LeftController = ({ type }) => {
                 style={{ 
                     position: 'absolute',
                     bottom: '20px', 
-                    left: '60px'
+                    left: type === 'vertical' ? '85%' : '65%'
                 }}
             >
-                <ScreenshotButton 
-                    scale={type === 'vertical' ? 2.5 : 2} 
-                />
+                <ScreenshotButton scale={type === 'vertical' ? 2.5 : 2} />
             </div>
         </div>  
     )
@@ -86,7 +88,7 @@ export const RightController = ({ type }) => {
                 justifyContent: 'center', 
                 alignItems: 'center',
                 height: '100%', /* Ensure the full height is utilized */
-                width: '85px',
+                width: '100%', /* Ensure the full width is utilized */
                 position: 'relative' /* Required for absolute positioning */
             }}
         >
@@ -97,13 +99,11 @@ export const RightController = ({ type }) => {
                     justifyContent: 'flex-start', 
                     alignItems: 'flex-start',
                     position: 'absolute',
-                    top: '10px', 
-                    left: '10px'
+                    top: '15px', 
+                    left: '15%'
                 }}
             >
-                <PlusButton 
-                    scale={type === 'vertical' ? 3 : 2} 
-                />
+                <PlusButton scale={type === 'vertical' ? 3 : 2} />
             </div>
             <div 
                 id='c-right-controller--middle'
@@ -111,11 +111,10 @@ export const RightController = ({ type }) => {
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr 1fr', /* 3 columns */
                     gridTemplateRows: '1fr 1fr 1fr',    /* 3 rows */
-                    width: type === 'vertical' ? '110px' : '80px',
-                    height: type === 'vertical' ? '110px' : '80px', 
+                    width: type === 'vertical' ? '60%' : '80%',
+                    height: type === 'vertical' ? '40%' : '25%',
                     justifyItems: 'center', /* Center buttons horizontally */
                     alignItems: 'center', /* Center buttons vertically */
-                    marginLeft: type === 'vertical' ? gameWidth/2.4 : 0
                 }}
             >
                 <AButton 
@@ -146,8 +145,8 @@ export const RightController = ({ type }) => {
                     justifyContent: 'flex-start',
                     alignItems: 'flex-end',
                     position: 'absolute',
-                    bottom: '20px', 
-                    left: '10px'
+                    bottom: '15px', 
+                    left: '15px'
                 }}
             >
                 <HomeButton 

@@ -44,16 +44,15 @@ const consumabes = {
 
 export default async (renderState) => {
 	const {
-		gameWidth, 
-		gameHeight,
+		gameWindowWidth, 
+		gameWindowHeight,
 		debug = false
 	  } = renderState
 
-	//console.log(`floor render w${gameWidth/2} h${gameHeight-platforms.lg.height/2}`)
 	const floor = Bodies.rectangle( 
-		gameWidth/2, 
-		gameHeight-38,
-		gameWidth,
+		gameWindowWidth/2, 
+		gameWindowHeight-36,
+		gameWindowWidth + 6,
 		platforms.lg.height, 
 		{ 
 			isStatic: true,
@@ -61,10 +60,10 @@ export default async (renderState) => {
 		}
 	);  
 	const wallRight = Bodies.rectangle(
-		gameWidth - ( gameWidth/4 ), // set right wall at quarter of game size to start scrolling there
-		gameHeight/2, 
+		gameWindowWidth - ( gameWindowWidth/4 ), // set right wall at quarter of game size to start scrolling there
+		gameWindowHeight/2, 
 		50, 
-		gameHeight, 
+		gameWindowHeight, 
 		{ 
 			isStatic: true,
 			label: 'Right Wall',
@@ -72,10 +71,10 @@ export default async (renderState) => {
 		}
 	);
 	const wallLeft = Bodies.rectangle(
-		-25, // set left wall at the very left so the object is in not in view
-		gameHeight/2, 
+		-25, // set left wall at the very left so the object is in not in view at all
+		gameWindowHeight/2, 
 		50,  
-		gameHeight, 
+		gameWindowHeight, 
 		{ 
 			isStatic: true,
 			label: 'Left Wall',
@@ -83,9 +82,9 @@ export default async (renderState) => {
 		}
 	);
  	const ceiling = Bodies.rectangle(
-		gameWidth/2, 
+		gameWindowWidth/2, 
 		-15, // start - at half of width so the object is in not in view
-		gameWidth, 
+		gameWindowWidth, 
 		30, 
 		{ 
 			isStatic: true,
@@ -93,8 +92,8 @@ export default async (renderState) => {
 		}
 	);
 	const player = Bodies.rectangle(
-		gameWidth/2, // spawn in center
-		30, // spawn near top
+		gameWindowWidth/2, // spawn in center
+		gameWindowHeight-60, // spawn near bottom
 		16, 
 		16,
 		{ 
@@ -106,14 +105,14 @@ export default async (renderState) => {
 
 	// Left boundary is the wall width with some padding
 	// Height boundary is celing height and floor each with a little padding
-	const p0_to_1000 = generateBodies(45, 1000, 40, gameHeight-80)
-	const p1000_to_2000 = generateBodies(1001, 2000, 40, gameHeight-80)
-	const p2000_to_3000 = generateBodies(2001, 3000, 40, gameHeight-80)
-	const p3000_to_4000 = generateBodies(3001, 4000, 40, gameHeight-80)
-	const p4000_to5000  = generateBodies(4001, 5000, 40, gameHeight-80)
-	const p5000_to_6000 = generateBodies(5001, 6000, 40, gameHeight-80)
-	const p6000_to_7000 = generateBodies(6001, 7000, 40, gameHeight-80)
-	const p7000_to_7900  = generateBodies(7001, 7900, 40, gameHeight-80)
+	const p0_to_1000 = generateBodies(45, 1000, 40, gameWindowHeight-80)
+	const p1000_to_2000 = generateBodies(1001, 2000, 40, gameWindowHeight-80)
+	const p2000_to_3000 = generateBodies(2001, 3000, 40, gameWindowHeight-80)
+	const p3000_to_4000 = generateBodies(3001, 4000, 40, gameWindowHeight-80)
+	const p4000_to5000  = generateBodies(4001, 5000, 40, gameWindowHeight-80)
+	const p5000_to_6000 = generateBodies(5001, 6000, 40, gameWindowHeight-80)
+	const p6000_to_7000 = generateBodies(6001, 7000, 40, gameWindowHeight-80)
+	const p7000_to_7900  = generateBodies(7001, 7900, 40, gameWindowHeight-80)
 
 	let generatedPlatformBodies = [
 		...Object.values(p0_to_1000.mediumPlatforms),
@@ -185,6 +184,8 @@ export default async (renderState) => {
 	World({
 		...renderState,
 		engine: engine,
+		width: gameWindowWidth,
+		height: gameWindowHeight,
 		entities: [ 
 			floor,
 			wallRight,

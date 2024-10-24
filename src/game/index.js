@@ -19,32 +19,41 @@ const Game = (props) => {
   const consoleType = width < 500 ? 'vertical' : 'horizontal'
 
   useEffect(() => {
-    store.dispatch( 
-      dimmensions({ width: width, height: height }) 
-    );
+      store.dispatch( 
+        dimmensions({ width: width, height: height }) 
+      );
   }, [])
   
-  const gameStyle = {
-    width: width - (consoleType === 'horizontal' ? 214 : 0), 
-    height: height, 
-    overflow: 'hidden',
-    // must set position to relative so that other css positioning is relative to this container
-    position: 'relative',
-    borderRadius: '20px'
+  console.log(`total width given`, width, 'height', height)
+  let windowWidth, windowHeight;
+  if ( consoleType === 'vertical' ) {
+    windowWidth = width - 30 /* padding */ - 12 /* borders width */ 
+    windowHeight = height * .5 /* set window to take half of the div */
+  } else {
+    windowWidth = width - 200 /* static controller width */ - 30 /* game window padding */ - 6
+    windowHeight = height - 30 /* game window padding */ - 6 /* borders width */
   }
-
+ 
   return (
-    <div id="game-container" >
-      <Console type={consoleType}>
+    <div id="game-container">
+      <Console 
+        type={consoleType}
+        windowHeight={windowHeight}
+        windowWidth={windowWidth}
+      >
           <GameEngine 
-            className="game-engine"
-            ref={(ref) => { gameEngine.current = ref; } }
-            style={gameStyle}
+            id="game-engine"
+            ref={(ref) => gameEngine.current = ref}
+            style={{  
+              width: '100%',
+              height: '100%',
+              position: 'relative', // must set position to relative so positioning for entities is relative to game engine div
+            }}
             running={true}
             systems={Systems} // collection of functions ran per tick
             entities={ Entities({
-              gameWidth: gameStyle.width, 
-              gameHeight: height,
+              gameWindowWidth: windowWidth, 
+              gameWindowHeight: windowHeight,
               debug: debug
             })}
           > 

@@ -9,17 +9,22 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const width  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 const height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
 
+let heightMultiplier = 0.5
+// 500 is the breakpoint for mobile mode
+if ( width <= 500 ) {
+    heightMultiplier = 0.8
+}
 root.render(
     <div
         style={{
-            padding: '5%',
+            //padding: '2%',
             //background: 'black',
         }}
     > 
         <PokeGame 
-            width={ width * .8 }
-            height={ height * .3334 }
-            //debug={true}
+            width={width}
+            height={height * heightMultiplier}
+            debug={true}
         />
     </div>
 );
