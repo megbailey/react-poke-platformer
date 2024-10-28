@@ -93,7 +93,7 @@ export default async (renderState) => {
 	);
 	const player = Bodies.rectangle(
 		gameWindowWidth/2, // spawn in center
-		gameWindowHeight-60, // spawn near bottom
+		gameWindowHeight * .1, /* spawn near top which is relatively safe from colliding on load  */
 		16, 
 		16,
 		{ 
