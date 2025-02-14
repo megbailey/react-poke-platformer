@@ -17,7 +17,6 @@ import {
 export const LeftController = ({ type }) => {
     const gameState = useSelector((state) => state.game.value)
     let keyPress = gameState.activeKeyPress
-    let gameWidth = gameState.totalWidth
 
     return (
         <div 
@@ -74,10 +73,8 @@ export const LeftController = ({ type }) => {
 }
 
 export const RightController = ({ type }) => {
-
     const gameState = useSelector((state) => state.game.value)
     let keyPress = gameState.activeKeyPress
-    let gameWidth = gameState.totalWidth
 
     return (
         <div 

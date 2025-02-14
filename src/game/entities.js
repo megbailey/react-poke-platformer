@@ -102,6 +102,12 @@ export default async (renderState) => {
 			inertia: Infinity /* prevents the body from rotation on collision */
 		}
 	); 
+	
+	/* 
+	* Using a global reference because reducer attempts to deep copy the matter.js object, 
+	* and it results in recursive max call stack exceeded error
+	*/
+	window.playerBody = player
 
 	// Left boundary is the wall width with some padding
 	// Height boundary is celing height and floor each with a little padding

@@ -19,12 +19,15 @@ const World = ({
     // only render on canvas when debug == true
     const debugCanvas = document.getElementById('debug-matter-canvas')
     if ( debug === true && debugCanvas) {
+      //console.log(engine)
       var render = Matter.Render.create({
         canvas: debugCanvas,
         engine: engine,
         options: {
           width: width,
           height: height,
+          wireframes: true,
+          showVelocity: true,
           //showIds: true
         }
       });

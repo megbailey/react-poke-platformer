@@ -1,6 +1,13 @@
-import React from "react"
+import React, { useRef } from "react"
 import switchButtons from '../assets/img/Switch.png';
 import xboxButtons from '../assets/img/Xbox.png';
+import useClickAndHold from "../utils/useClickAndHold.js";
+import { 
+    onMoveRight,
+    onMoveLeft,
+    onMoveTop,
+    onMoveBottom 
+} from "../utils/onMove.js";
 
 const ConsoleButton = ({ 
     style,
@@ -8,10 +15,13 @@ const ConsoleButton = ({
     width,
     height,
     scale,
+    useMap,
+    children,
     left = 0,
     top = 0,
+    ...other
 }) => {
-
+  
     return (
         <div 
             className='c-console--btn'
@@ -22,13 +32,16 @@ const ConsoleButton = ({
                 overflow: `hidden`,
                 transform: `scale(${scale}, ${scale})`
             }}
+            {...other}
         >
             <img 
                 style={{ 
                     transform: `translate(-${left}px, -${top}px)`
                 }}
                 src={src}
+                useMap={useMap}
             />
+            {children}
         </div>  
     )
 }
@@ -38,12 +51,14 @@ const SwitchButton = ({
     isSelected = false,
     left = 0,
     top = 0,
-    scale = 2
+    scale = 2,
+    ...other
 }) => {
     const width = 16
     const height = 16
     if ( isSelected ) return (
         <ConsoleButton 
+            {...other}
             style={style} 
             src={switchButtons} 
             height={height} 
@@ -55,6 +70,7 @@ const SwitchButton = ({
     )
     return (
         <ConsoleButton 
+            {...other}
             style={style} 
             src={switchButtons} 
             height={height} 
@@ -101,13 +117,31 @@ export const HomeButton = ({ isSelected, style, scale }) => {
 
 const XboxButton = ({ 
     style,
+    useMap,
+    children,
     top = 0,
     left = 0,
     height = 32, 
     width = 32,
-    scale = 2.5
+    scale = 2.5,
+    ...other
 }) => {
-    return <ConsoleButton style={style} src={xboxButtons} height={height} width={width} left={left} top={top} scale={scale}/>
+
+    return ( 
+        <ConsoleButton 
+            {...other}
+            style={style} 
+            src={xboxButtons} 
+            height={height} 
+            width={width} 
+            left={left} 
+            top={top} 
+            scale={scale}
+            useMap={useMap}
+        >
+           {children}
+        </ConsoleButton>
+    )
 }
 
 export const DPad = ({ 
@@ -120,16 +154,63 @@ export const DPad = ({
     isBottomSelected
 }) => { 
 
-    if ( inactive )
-        return <XboxButton style={style} scale={scale} top={32} left={32}/>
-    else if ( isTopSelected )
-        return <XboxButton style={style} scale={scale} top={32} left={64}/>
-    else if ( isBottomSelected )
-        return <XboxButton style={style} scale={scale} top={32} left={96}/>
-    else if ( isRightSelected )
-        return <XboxButton style={style} scale={scale} top={32} left={128}/>
-    else if ( isLeftSelected )
-        return <XboxButton style={style} scale={scale} top={32} left={160}/>
+    const leftRef = useRef(null)
+    const rightRef = useRef(null)
+    const topRef = useRef(null)
+    const bottomRef = useRef(null)
 
-    return <XboxButton style={style} scale={scale} top={31.5} />
+    useClickAndHold(leftRef, onMoveLeft);
+    useClickAndHold(rightRef, onMoveRight);
+    useClickAndHold(topRef, onMoveTop);
+    useClickAndHold(bottomRef, onMoveBottom);
+
+    const imageMap = (
+        <map name="dpad">
+            {/* Top */}
+            <area
+                ref={topRef}
+                id={'top-pad'}
+                alt="D-Pad Top" 
+                coords="12, 37, 20, 47" 
+                shape="rect"                
+            />
+            {/* Left */}
+            <area 
+                ref={leftRef}
+                id={'left-pad'}
+                alt="D-Pad Left" 
+                coords="4, 45, 12, 55" 
+                shape="rect" 
+            />
+            {/* Right */}
+            <area 
+                ref={rightRef}
+                id={'right-pad'}
+                alt="D-Pad Right" 
+                coords="19, 45, 28, 55" 
+                shape="rect" 
+            />
+            {/* Bottom */}
+            <area 
+                ref={bottomRef}
+                id={'bottom-pad'}
+                alt="D-Pad Bottom" 
+                coords="12, 55, 20, 63" 
+                shape="rect" 
+            />
+        </map>
+    )
+
+    if ( inactive )
+        return <XboxButton style={style} scale={scale} top={32} left={32}></XboxButton>
+    else if ( isTopSelected )
+        return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={32} left={64}>{imageMap}</XboxButton>
+    else if ( isBottomSelected )
+        return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={32} left={96}>{imageMap}</XboxButton>
+    else if ( isRightSelected )
+        return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={32} left={128}>{imageMap}</XboxButton>
+    else if ( isLeftSelected )
+        return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={32} left={160}>{imageMap}</XboxButton>
+
+    return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={31.5} >{imageMap}</XboxButton>
 }
