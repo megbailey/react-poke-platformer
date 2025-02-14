@@ -1,25 +1,24 @@
-import Matter from 'matter-js';
 import store from '../store.js'
 import { direction, keyPress } from '../reducers.js';
+import GlobalPlayerBodyStore from '../matter-body-store.js';
+
+let {
+    translate,
+    setVerticalVelocity
+} = GlobalPlayerBodyStore
 
 export const onMoveRight =  ( ) => {
     console.log('right')
     store.dispatch( direction('RIGHT') );
     store.dispatch( keyPress('DPAD-RIGHT') );
-    Matter.Body.translate( window.playerBody, { 
-        x: 2,
-        y: 0
-    })
+    translate(2, 0)
 }
 
 export const onMoveLeft =  ( ) => {
     console.log('left')
     store.dispatch( direction('LEFT') );
     store.dispatch( keyPress('DPAD-LEFT') );
-    Matter.Body.translate( window.playerBody, { 
-        x: -2,
-        y: 0
-    })
+    translate(-2, 0)
 }
 
 export const onMoveTop =  ( ) => {
@@ -36,8 +35,5 @@ export const onMoveBottom =  ( ) => {
 
 export const onMoveUp = ( ) => {
     store.dispatch( keyPress('ACTION-X') );
-    Matter.Body.setVelocity( window.playerBody, {
-        x: window.playerBody.velocity.x,
-        y: -16
-    });
+    setVerticalVelocity(16)
 }

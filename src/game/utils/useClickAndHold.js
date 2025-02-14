@@ -25,10 +25,10 @@ const useClickAndHold = (elRef, callback, timeout = 25) => {
 
             return () => {
                 pressEvents.forEach( type => {
-                    elRef.current.removeEventListener( type, onHoldStart, { passive: true } )
+                    if ( elRef.current ) elRef.current.removeEventListener( type, onHoldStart, { passive: true } )
                 });
                 unpressEvents.forEach( type => {
-                    elRef.current.removeEventListener( type, onHoldEnd, { passive: true } )
+                    if ( elRef.current ) elRef.current.removeEventListener( type, onHoldEnd, { passive: true } )
                 });
     
             }

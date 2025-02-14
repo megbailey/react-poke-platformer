@@ -4,7 +4,7 @@ import Matter from 'matter-js';
 import World from "./world.js";
 import store from './store.js'
 import { consume } from './reducers.js';
-
+import GlobalPlayerBodyStore from './matter-body-store.js';
 import Player from "./components/Player.jsx";
 import Platform from "./components/Platform.jsx";
 import { ForestBackground } from './components/Background.jsx';
@@ -21,6 +21,7 @@ import { getRandomInteger } from './utils/index.js';
 
 let Engine = Matter.Engine;
 let Bodies = Matter.Bodies;
+let { initialize } = GlobalPlayerBodyStore
 
 const platforms = {
 	md: {
@@ -51,7 +52,7 @@ export default async (renderState) => {
 
 	const floor = Bodies.rectangle( 
 		gameWindowWidth/2, 
-		gameWindowHeight-36,
+		gameWindowHeight /* 15px padding 2 + 3px border x 2*/ -36  /* move the floor up on gameboy mode */  - (gameWindowHeight <= 457 ? 18 : 0),
 		gameWindowWidth + 6,
 		platforms.lg.height, 
 		{ 
@@ -104,10 +105,10 @@ export default async (renderState) => {
 	); 
 	
 	/* 
-	* Using a global reference because reducer attempts to deep copy the matter.js object, 
-	* and it results in recursive max call stack exceeded error
+	* Using a global store because player needed to be manipulated
+	* outside of the game engine
 	*/
-	window.playerBody = player
+	initialize(player)
 
 	// Left boundary is the wall width with some padding
 	// Height boundary is celing height and floor each with a little padding
