@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useEffect } from "react";
 
 /** 
 * @param elRef The HTML element to apply the event to
@@ -8,17 +8,17 @@ const useClickAndHold = (elRef, callback, timeout = 25) => {
     const isHeld = useRef(false)
     const activeHoldTimeoutId = useRef(null)
 
-    useLayoutEffect(() => {
-        console.log(elRef.current)
-        const pressEvents = ["mousedown", "touchstart"]
-        const unpressEvents = ["mouseup", "touchend", "touchcancel"]
+    useEffect(() => {
+        //console.log(elRef.current)
+        const pressEvents = [/* "mousedown", */ "touchstart"]
+        const unpressEvents = [/* "mouseup", "mouseleave", */ "touchend", "touchcancel"]
         if ( elRef.current) {
             pressEvents.forEach( type => {
                 elRef.current.addEventListener( type, onHoldStart, { passive: true } )
             });
             unpressEvents.forEach( type => {
                 elRef.current.addEventListener( type, () => {
-                    console.log("stop move", type)
+                    //console.log("stop move", type)
                     onHoldEnd()
                 } )
             });

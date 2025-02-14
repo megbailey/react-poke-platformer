@@ -37,7 +37,7 @@ export const onMoveBottom =  ( ) => {
 export const onMoveUp = ( ) => {
     store.dispatch( keyPress('ACTION-X') );
     Matter.Body.setVelocity( window.playerBody, {
-        x: player.body.velocity.x,
+        x: window.playerBody.velocity.x,
         y: -16
     });
 }

@@ -15,8 +15,6 @@ import {
 
 
 export const LeftController = ({ type }) => {
-    const gameState = useSelector((state) => state.game.value)
-    let keyPress = gameState.activeKeyPress
 
     return (
         <div 
@@ -31,7 +29,8 @@ export const LeftController = ({ type }) => {
                 position: 'relative' /* Required for absolute positioning */
             }}
         >
-            <div id='c-controller--left-top' 
+            <div 
+                id='c-controller--left-top' 
                 style={{ 
                     position: 'absolute',
                     top: '15px', 
@@ -51,15 +50,10 @@ export const LeftController = ({ type }) => {
                 }}
                 scale={type === 'vertical' ? 3 : 2}
             >
-                <DPad 
-                    scale={type === 'vertical' ? 3.5 : 2.5}
-                    isLeftSelected={ keyPress === 'DPAD-LEFT'}
-                    isRightSelected={ keyPress === 'DPAD-RIGHT' }
-                    isTopSelected={ keyPress === 'DPAD-UP' }
-                    isBottomSelected={ keyPress === 'DPAD-DOWN' }
-                />
+                <DPad scale={type === 'vertical' ? 3.5 : 2.5} />
             </div>
-            <div id='c-controller--left-bottom' 
+            <div 
+                id='c-controller--left-bottom' 
                 style={{ 
                     position: 'absolute',
                     bottom: '20px', 

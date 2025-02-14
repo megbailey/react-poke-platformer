@@ -3,22 +3,28 @@ import { keyPress } from '../reducers.js';
 import { onMoveBottom, onMoveLeft, onMoveRight, onMoveTop, onMoveUp } from '../utils/onMove.js';
 
 const Move = (entities, { KeyboardController }) => {
-  if ( KeyboardController.w) {
+  if ( KeyboardController.w ) {
     // face back
     onMoveTop()
-  } else if ( KeyboardController.a ) {
+  }
+  if ( KeyboardController.a ) {
     // face & walk left
     onMoveLeft()
-  } else if ( KeyboardController.s  ) {
+  }
+  if ( KeyboardController.s  ) {
     // face bottom
     onMoveBottom()
-  } else if ( KeyboardController.d ) {
+  } 
+  if ( KeyboardController.d ) {
     // face & walk right
     onMoveRight()
-  } else if (KeyboardController.space  && KeyboardController.previous.space !== KeyboardController.space ) {
+  } 
+  if ( KeyboardController.space  && KeyboardController.previous.space !== KeyboardController.space ) {
     // jump
     onMoveUp()
-  } else {
+  } 
+  
+  if ( !KeyboardController.w && !KeyboardController.a && !KeyboardController.s && !KeyboardController.d && !KeyboardController.space ) {
     store.dispatch( keyPress(null) )
   }
 

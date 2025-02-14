@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
-import switchButtons from '../assets/img/Switch.png';
-import xboxButtons from '../assets/img/Xbox.png';
+import { useSelector } from "react-redux";
+
 import useClickAndHold from "../utils/useClickAndHold.js";
 import { 
     onMoveRight,
@@ -8,6 +8,8 @@ import {
     onMoveTop,
     onMoveBottom 
 } from "../utils/onMove.js";
+import switchButtons from '../assets/img/Switch.png';
+import xboxButtons from '../assets/img/Xbox.png';
 
 const ConsoleButton = ({ 
     style,
@@ -30,13 +32,20 @@ const ConsoleButton = ({
                 height: `${height}px`,
                 width: `${width}px`,
                 overflow: `hidden`,
-                transform: `scale(${scale}, ${scale})`
+                transform: `scale(${scale}, ${scale})`,
             }}
             {...other}
         >
             <img 
                 style={{ 
-                    transform: `translate(-${left}px, -${top}px)`
+                    transform: `translate(-${left}px, -${top}px)`,
+                    '-moz-user-select': 'none',
+                    '-webkit-user-select': 'none',
+                    'user-select': 'none',
+                    'user-drag': 'none',
+                    '-webkit-user-drag': 'none',
+                    '-moz-user-select': 'none',
+                    '-ms-user-select': 'none',
                 }}
                 src={src}
                 useMap={useMap}
@@ -148,11 +157,14 @@ export const DPad = ({
     style,
     scale,
     inactive, 
-    isLeftSelected, 
+    /* isLeftSelected, 
     isRightSelected, 
     isTopSelected, 
-    isBottomSelected
+    isBottomSelected */
 }) => { 
+
+    const gameState = useSelector((state) => state.game.value)
+    let keyPress = gameState.activeKeyPress
 
     const leftRef = useRef(null)
     const rightRef = useRef(null)
@@ -203,13 +215,13 @@ export const DPad = ({
 
     if ( inactive )
         return <XboxButton style={style} scale={scale} top={32} left={32}></XboxButton>
-    else if ( isTopSelected )
+    else if ( keyPress === 'DPAD-UP' )
         return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={32} left={64}>{imageMap}</XboxButton>
-    else if ( isBottomSelected )
+    else if ( keyPress === 'DPAD-DOWN' )
         return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={32} left={96}>{imageMap}</XboxButton>
-    else if ( isRightSelected )
+    else if ( keyPress === 'DPAD-RIGHT' )
         return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={32} left={128}>{imageMap}</XboxButton>
-    else if ( isLeftSelected )
+    else if ( keyPress === 'DPAD-LEFT' )
         return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={32} left={160}>{imageMap}</XboxButton>
 
     return <XboxButton useMap={'#dpad'} style={style} scale={scale} top={31.5} >{imageMap}</XboxButton>
