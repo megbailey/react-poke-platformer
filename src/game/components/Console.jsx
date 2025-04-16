@@ -106,14 +106,14 @@ const VerticalConsole = ({  windowWidth, windowHeight, children }) => {
                     borderWidth: '3px',
                     borderTopLeftRadius: '25px',
                     borderTopRightRadius: '25px',
-                    height: '50%',
+                    height: '60%',
                 }}
             > 
                 <div 
                     id="c-console-game-window"
                     style={{
                         width: `${windowWidth}px`,
-                        height: `${windowHeight}px`,
+                        height: `${windowHeight -28 /* border width + border radius*/}px`,
                         display: 'flex',
                         justifyContent: 'center', 
                         alignItems: 'center',

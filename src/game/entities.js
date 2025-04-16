@@ -52,7 +52,7 @@ export default async (renderState) => {
 
 	const floor = Bodies.rectangle( 
 		gameWindowWidth/2, 
-		gameWindowHeight /* 15px padding 2 + 3px border x 2*/ -36  /* move the floor up on gameboy mode */  - (gameWindowHeight <= 457 ? 18 : 0),
+		gameWindowHeight /* 15px padding 2 + 3px border x 2*/ -36,
 		gameWindowWidth + 6,
 		platforms.lg.height, 
 		{ 

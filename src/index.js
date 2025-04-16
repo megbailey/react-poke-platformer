@@ -24,7 +24,7 @@ root.render(
         <PokeGame 
             width={width}
             height={height * heightMultiplier}
-            debug={true}
+            //debug={true}
         />
     </div>
 );

@@ -9,11 +9,15 @@ const GlobalPlayerBodyStore = (() => {
     let _playerbody = null;
     return {
         initialize: body => _playerbody = body,
-        translate: (x, y) => Matter.Body.translate( 
-            _playerbody, { 
-                x: x,
-                y: y
-        }),
+        body: () => _playerbody,
+        translate: (x, y) => {
+            console.log(_playerbody, x, y)
+            Matter.Body.translate( 
+                _playerbody, { 
+                    x: x,
+                    y: y
+            })
+        },
         setVerticalVelocity: (y) => Matter.Body.setVelocity( 
             _playerbody, {
                 x: _playerbody.velocity.x,

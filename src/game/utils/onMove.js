@@ -4,21 +4,21 @@ import GlobalPlayerBodyStore from '../matter-body-store.js';
 
 let {
     translate,
-    setVerticalVelocity
+    setVerticalVelocity,
 } = GlobalPlayerBodyStore
 
 export const onMoveRight =  ( ) => {
-    console.log('right')
+    //console.log('move right')
     store.dispatch( direction('RIGHT') );
     store.dispatch( keyPress('DPAD-RIGHT') );
-    translate(2, 0)
+    //translate(2, 0)
 }
 
 export const onMoveLeft =  ( ) => {
-    console.log('left')
+    //console.log('move left')
     store.dispatch( direction('LEFT') );
     store.dispatch( keyPress('DPAD-LEFT') );
-    translate(-2, 0)
+    //translate(-2, 0)
 }
 
 export const onMoveTop =  ( ) => {
@@ -34,6 +34,7 @@ export const onMoveBottom =  ( ) => {
 }
 
 export const onMoveUp = ( ) => {
+    //console.log('jump')
     store.dispatch( keyPress('ACTION-X') );
-    setVerticalVelocity(16)
+    //setVerticalVelocity(16)
 }

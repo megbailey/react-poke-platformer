@@ -39,13 +39,13 @@ const ConsoleButton = ({
             <img 
                 style={{ 
                     transform: `translate(-${left}px, -${top}px)`,
-                    '-moz-user-select': 'none',
-                    '-webkit-user-select': 'none',
-                    'user-select': 'none',
-                    'user-drag': 'none',
-                    '-webkit-user-drag': 'none',
-                    '-moz-user-select': 'none',
-                    '-ms-user-select': 'none',
+                    MozUserSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    userSelect: 'none',
+                    userDrag: 'none',
+                    WebkitUserDrag: 'none',
+                    MozUserSelect: 'none',
+                    msUserSelect: 'none',
                 }}
                 src={src}
                 useMap={useMap}
@@ -171,10 +171,10 @@ export const DPad = ({
     const topRef = useRef(null)
     const bottomRef = useRef(null)
 
-    useClickAndHold(leftRef, onMoveLeft);
+    /* useClickAndHold(leftRef, onMoveLeft);
     useClickAndHold(rightRef, onMoveRight);
     useClickAndHold(topRef, onMoveTop);
-    useClickAndHold(bottomRef, onMoveBottom);
+    useClickAndHold(bottomRef, onMoveBottom); */
 
     const imageMap = (
         <map name="dpad">
