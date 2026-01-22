@@ -37,7 +37,7 @@
     "@babel/runtime": "^7.22.11",
     "@popmotion/popcorn": "^0.4.4",
     "@reduxjs/toolkit": "^2.2.1",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "matter-js": "^0.20.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
