@@ -8,6 +8,7 @@
     "start:dev": "webpack serve --config webpack.config.js --mode development",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
+    "analyze": "npm run start -- --analyze",
     "prepare": "npm run build"
   },
   "engines": {

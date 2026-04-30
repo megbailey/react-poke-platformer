@@ -2,6 +2,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const port = process.env.PORT || 3000;
 
@@ -13,8 +14,10 @@ module.exports = (env, argv) => {
     const isProduction = !argv['mode'] || argv['mode'] === 'production';
     const isDevelopment = argv['mode'] === 'development';
     const isWebpackServer = process.env['WEBPACK_SERVE'] === 'true';
+    const isAnalyze = argv['analyze'] || argv['analyze'] === 'true';
 
-    console.log( `Prod: ${isProduction}`, `Dev: ${isDevelopment}`,`WebpackServer: ${isWebpackServer}`)
+
+    console.log(`Prod: ${isProduction} \nDev: ${isDevelopment}\nAnalyzeBundle: ${isAnalyze} \nWebpackServer: ${isWebpackServer}`)
     const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
     const config = {
@@ -98,10 +101,20 @@ module.exports = (env, argv) => {
         }
     }
        
+    if (isAnalyze) {
+        config.plugins.push(
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'server',
+                openAnalyzer: true,
+            })
+        );
+    }
     
     if (isProduction) {
         config.mode = 'production';
-        config.plugins.push(new MiniCssExtractPlugin());
+        config.plugins.push(
+            new MiniCssExtractPlugin()
+        );
     } else if (isDevelopment) {
         config.mode = 'development';
     } 
