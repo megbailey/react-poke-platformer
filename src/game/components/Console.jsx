@@ -1,7 +1,8 @@
-import React from "react";
+import React, { lazy } from "react";
 import { useSelector } from "react-redux";
 
-import { LeftController, RightController } from "./ConsoleControllers.jsx";
+const LeftController = lazy(() => import("./ConsoleControllers.jsx").then(module => ({ default: module.LeftController })));
+const RightController = lazy(() => import("./ConsoleControllers.jsx").then(module => ({ default: module.RightController })));
 
 const HorizontalConsole = ({ windowWidth, windowHeight, children }) => {
     const gameState = useSelector((state) => state.game.value)

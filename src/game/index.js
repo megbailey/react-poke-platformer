@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { lazy, useEffect, useRef } from "react";
 import { GameEngine } from "react-game-engine";
 import { Provider } from "react-redux";
 import Entities from "./entities.js";
@@ -7,7 +7,7 @@ import Systems from "./systems/index.js";
 import store from './store.js';
 import { dimmensions } from './reducers.js';
 
-import Console from "./components/Console.jsx";
+const Console = lazy(() => import("./components/Console.jsx"));
 
 const Game = (props) => {
   const { 

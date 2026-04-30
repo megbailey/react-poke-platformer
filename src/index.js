@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import PokeGame from "./game/index.js";
 /* import * as ServiceWorker from './service-worker.js'
 import reportWebVitals from './reportWebVitals.js'; */
 
+const PokeGame = lazy(() => import('./game/index.js'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const width  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 const height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
