@@ -23,7 +23,7 @@ module.exports = (env, argv) => {
             path: path.resolve(__dirname, `dist`),
             filename: `${filename}`,
         },
-        devtool: 'inline-source-map',
+        devtool: 'source-map',
         devServer: {
             port: port,
             hot: true
@@ -78,31 +78,33 @@ module.exports = (env, argv) => {
         },
     };
 
-    if (isProduction) {
-        config.mode = 'production';
-        
-        config.plugins.push(new MiniCssExtractPlugin());
-        // don't include react in library export so that it doesnt conflict when being used by other projects
+     
+    // Unless running as a webpack server, don't include react in library export so that 
+    // it will not conflict when being used by peer projects
+    if (!isWebpackServer) {
         config.externals = {
             'react': 'react',
             'react-dom': 'react-dom',
             'react-redux': 'react-redux',
             '@reduxjs/toolkit': '@reduxjs/toolkit'
         }
-
         config.output.libraryTarget = 'commonjs2';
-
-    } else if (isDevelopment) {
-        config.mode = 'development';
-    } 
-
-    if ( isWebpackServer ) { 
-        // If running as a dev server, we want to call our component library to render it. 
+    } else {
+        // If running as a dev server or production app, we want to render the app. 
         // So entry point will be level higher so that app will render at <div id='root'></div>
         config.entry = './src/index.js';
         config.output.library = {
             type: 'umd'
         }
     }
+       
+    
+    if (isProduction) {
+        config.mode = 'production';
+        config.plugins.push(new MiniCssExtractPlugin());
+    } else if (isDevelopment) {
+        config.mode = 'development';
+    } 
+
     return config;
 };
