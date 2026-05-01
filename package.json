@@ -12,8 +12,8 @@
     "prepare": "npm run build"
   },
   "engines": {
-    "npm": ">=8.0.0",
-    "node": ">=16.0.0"
+    "npm": ">=10.0.0",
+    "node": ">=20.9.0"
   },
   "eslintConfig": {
     "extends": [
