@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
             path: path.resolve(__dirname, `dist`),
             filename: `${filename}`,
         },
-        devtool: 'source-map',
+        devtool: isDevelopment ? 'inline-source-map' : 'source-map',
         devServer: {
             port: port,
             hot: true
